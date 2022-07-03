@@ -1,6 +1,6 @@
 # microcal_classifier
 
-[![CircleCI](https://circleci.com/gh/lorenzomarini96/microcal-classifier.svg?style=svg)](https://app.circleci.com/pipelines/github/lorenzomarini96/microcal_classifier?filter=all)
+[![CircleCI](https://circleci.com/gh/lorenzomarini96/microcal-classifier.svg?style=shield)](https://app.circleci.com/pipelines/github/lorenzomarini96/microcal_classifier?filter=all)
 
 [![Documentation Status](https://readthedocs.org/projects/microcal-classifier/badge/?version=latest)](https://microcal-classifier.readthedocs.io/en/latest/?badge=latest)
 
