@@ -25,18 +25,21 @@ All dataset details are provided in the reference paper (add references).
 
 The datasets are partitionated according the following hierarchy:
 
-`
+```
 ├── DATASETS
-│   └── IMAGES
-│       └── Mammography_micro
-│           ├── Test
-│           │   ├── 0
-│           │   └── 1
-│           └── Train
-│               ├── 0
-│               └── 1
+    └── IMAGES
+        └── Mammography_micro
+            ├── Test
+            │   ├── 0
+            │   └── 1
+            └── Train
+                ├── 0
+                └── 1
 
-`
+```
+
+<img src="docs/images/mammo_images.png" width="500"> 
+![](docs/images/mammo_images.png)
 
 The DATASETS folder can be downloaded from 
 
