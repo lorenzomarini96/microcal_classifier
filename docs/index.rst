@@ -6,11 +6,17 @@
 Welcome to microcal_classifier's documentation!
 ===============================================
 
+Un po' di prove sulla documentazione.
+
+--
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    api
+   cnn_model
+   cnnhelper
 
 Indices and tables
 ==================
