@@ -14,7 +14,7 @@ Cluster of microcalcifications can be an early sign of breast cancer. In this py
 
 ## Train, test, validation sets
 
-The provided dataset contains 396 images of 60 $\times$ 60 pixels representing portions of mammogram either containing microcalcification clusters (label=1) or  normal breast tissue (label=0). The available images are already partitioned in a train and a test samples, containing, respectively:
+The provided dataset contains 797 images of 60 $\times$ 60 pixels representing portions of mammogram either containing microcalcification clusters (label=1) or  normal breast tissue (label=0). The available images are already partitioned in a train and a test samples, containing, respectively:
 
 | Sets      | Normal tissue | Microcalcification clusters|
 | --------- | ------------- | -------------------------- |
@@ -26,20 +26,18 @@ All dataset details are provided in the reference paper (add references).
 The datasets are partitionated according the following hierarchy:
 
 ```
-├── DATASETS
-    └── IMAGES
-        └── Mammography_micro
-            ├── Test
-            │   ├── 0
-            │   └── 1
-            └── Train
-                ├── 0
-                └── 1
-
+DATASETS
+└── IMAGES
+    └── Mammography_micro
+        ├── Test
+        │   ├── 0
+        │   └── 1
+        └── Train
+            ├── 0
+            └── 1
 ```
 
 <img src="docs/images/mammo_images.png" width="500"> 
-![](docs/images/mammo_images.png)
 
 The DATASETS folder can be downloaded from 
 
@@ -49,6 +47,8 @@ In this case, the first dataset contains 80% of the total number of 396 images, 
 
 
 ## CNN Architecture
+
+### Model
 
 ## Cross validation procedures
 
