@@ -15,7 +15,9 @@ Un po' di prove sulla documentazione.
    :caption: Contents:
 
    api
+
    cnn_model
+   
    cnnhelper
 
 Indices and tables
