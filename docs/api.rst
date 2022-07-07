@@ -4,5 +4,5 @@ API documentation
 microcal_classifier
 -------------------
 
-.. automodule:: cnnhelper
+.. automodule:: microcal_classifier.cnnhelper
    :members:
