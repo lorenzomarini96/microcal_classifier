@@ -63,7 +63,7 @@ exclude_patterns = [u'_build', 'Thumbs.db', '.DS_Store']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
-html_theme = 'python_docs_theme'
+#html_theme = 'python_docs_theme'
 
 # -- Options for LaTeX output ------------------------------------------------
 latex_engine = 'xelatex'
