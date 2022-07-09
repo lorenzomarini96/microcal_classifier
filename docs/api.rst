@@ -16,4 +16,10 @@ cnnhelper
 
 .. automodule:: cnnhelper
    :members:
-      
+
+
+data_augmentation 
+-----------------
+
+.. automodule:: data_augmentation
+   :members:
