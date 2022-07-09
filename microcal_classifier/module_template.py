@@ -17,6 +17,14 @@ def func1(arg1, arg2):
     int
         Return the sum of arg1 with arg2.
 
+    Examples
+    --------
+    Test per vedere come si comporta la documentazione.
+    
+    >>> x = func1(1,2)
+    >>> print(x)
+    3
+
     """
 
     return arg1 + arg2
