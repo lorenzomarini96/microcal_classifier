@@ -6,6 +6,8 @@
 Welcome to microcal_classifier's documentation!
 ===============================================
 
+Prove di scrittura su index. Perché non funziona...
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
