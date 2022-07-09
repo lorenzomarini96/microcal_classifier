@@ -9,7 +9,7 @@ def func1(arg1, arg2):
     ----------
     arg1 : int
         The first parameter.
-    arg1 : int
+    arg2 : int
         The second parameter.
 
     Returns
