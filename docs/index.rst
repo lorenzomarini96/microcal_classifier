@@ -10,10 +10,12 @@ Prove di scrittura su index. Perché non funziona...
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-
+   
    api
    
+   cnn_model
+   
+   cnnhelper
    
 Indices and tables
 ==================
