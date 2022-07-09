@@ -10,7 +10,7 @@ Welcome to microcal_classifier's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   cnn_model
+   api
 
 Indices and tables
 ==================
