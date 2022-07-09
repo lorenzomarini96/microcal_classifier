@@ -1,4 +1,4 @@
-cnnhelper 
+cnnhelper
 ---------
 
 .. automodule:: cnnhelper

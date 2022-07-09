@@ -1,4 +1,4 @@
-cnn_model 
+cnn_model
 ---------
 
 .. automodule:: cnn_model
