@@ -23,3 +23,10 @@ data_augmentation
 
 .. automodule:: data_augmentation
    :members:
+
+
+module_template
+---------------
+
+.. automodule:: module_template
+   :members:

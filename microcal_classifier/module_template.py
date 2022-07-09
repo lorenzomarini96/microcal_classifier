@@ -1,4 +1,4 @@
-"""Docstrings of the module_template"""
+"""Docstrings of the module1"""
 
 def func1(arg1, arg2):
     """
@@ -17,7 +17,3 @@ def func1(arg1, arg2):
     """
 
     return arg1 + arg2
-
-
-if __name__ == "__main__":
-    func1(None, None)
