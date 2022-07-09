@@ -13,10 +13,6 @@ Prove di scrittura su index. Perché non funziona...
    :caption: Contents:
 
    api
-
-   cnnhelper
-   
-   cnn_model
    
 Indices and tables
 ==================
