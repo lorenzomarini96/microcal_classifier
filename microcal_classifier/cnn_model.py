@@ -20,7 +20,7 @@ logger.addHandler(file_handler)
 
 def cnn_classifier(shape=(60, 60, 1), verbose=False):
     # pylint: disable=W0613
-        """
+    """
     CNN for microcalcification clusters classification.
 
     Parameters
@@ -76,6 +76,7 @@ def cnn_classifier(shape=(60, 60, 1), verbose=False):
     Non-trainable params: 0
 
     """
+
     model = Sequential()
 
     model.add(Input(shape=(60, 60, 1)))
