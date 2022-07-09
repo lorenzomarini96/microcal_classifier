@@ -12,6 +12,10 @@ Welcome to microcal_classifier's documentation!
 
    api
 
+   cnnhelper
+   
+   cnn_model
+   
 Indices and tables
 ==================
 
