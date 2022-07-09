@@ -13,9 +13,6 @@ Prove di scrittura su index. Perché non funziona...
    
    api
    
-   cnn_model
-   
-   cnnhelper
    
 Indices and tables
 ==================
