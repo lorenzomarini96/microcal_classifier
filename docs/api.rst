@@ -4,21 +4,21 @@ API documentation
 Scrittura di testo su api. Vediamo se readthedocs aggiorna.
 
 
-cnn_model 
+cnn_model
 ---------
 
 .. automodule:: cnn_model
    :members:
 
 
-cnnhelper 
+cnnhelper
 ---------
 
 .. automodule:: cnnhelper
    :members:
 
 
-data_augmentation 
+data_augmentation
 -----------------
 
 .. automodule:: data_augmentation
