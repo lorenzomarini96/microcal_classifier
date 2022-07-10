@@ -1,6 +1,7 @@
 """Test documentazione modulo che utilizza numpy."""
 
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 def somma(a, b):
@@ -51,6 +52,24 @@ def grafico(x, y):
     plt.plot(x, y)
     plt.show()
 
+def tabella(x, y):
+    """
+    tabella con  x e y
+
+    Parameters
+    ----------
+    x : array numpy
+        The first array
+    y : array numpy
+        The second array
+    
+    """
+
+    data = {'x': x, 'y': y}
+    tabella = pd.DataFrame(data)
+    print(tabella)
+
+
 if __name__ == '__main__':
     a = np.array([1,2,3])
     b = np.array([1,2,3])
@@ -59,3 +78,5 @@ if __name__ == '__main__':
     print(sum)
 
     grafico(a, b)
+
+    tabella(a, b)
