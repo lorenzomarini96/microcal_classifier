@@ -7,7 +7,9 @@ Scrittura di testo su api. Vediamo se readthedocs aggiorna.
 cnn_model 
 ---------
 
-.. autofunction:: cnn_model.cnn_classifier
+.. automodule:: cnn_model
+   :members:
+
 
 cnnhelper 
 ---------
@@ -34,4 +36,11 @@ cnn_model_v2
 ------------
 
 .. automodule:: cnn_model_v2
+   :members:
+
+
+test_numpy
+----------
+
+.. automodule:: test_numpy
    :members:

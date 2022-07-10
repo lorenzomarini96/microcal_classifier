@@ -17,6 +17,12 @@ package_root = os.path.abspath('..')
 sys.path.insert(0, package_root)
 sys.path.insert(0, os.path.join(package_root, package_name))
 
+#import mock
+ 
+#MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot', 'scipy.interpolate']
+#for mod_name in MOCK_MODULES:
+#sys.modules[mod_name] = mock.Mock()
+autodoc_mock_imports = ["numpy"]
 
 # -- Project information -----------------------------------------------------
 
