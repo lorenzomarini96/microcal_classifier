@@ -40,7 +40,8 @@ autodoc_mock_imports = ["numpy",
                         "keras.preprocessing.image.ImageDataGenerator",
                         "keras.preprocessing.image.array_to_img",
                         "keras.preprocessing.image.array_to_img.img_to_array",
-                        "keras.preprocessing.image.array_to_img.load_img"
+                        "keras.preprocessing.image.array_to_img.load_img",
+                        "tensorflow"
                         ]
 
 # -- Project information -----------------------------------------------------
