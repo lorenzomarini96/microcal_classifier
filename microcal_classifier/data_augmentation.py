@@ -20,12 +20,32 @@ logger.addHandler(file_handler)
 
 
 def convert_to_png(fname, dest_folder):
-    """Convert the extension of the given image from .pgm to .png.
+    """
+    Convert the extension of the given image from .pgm to .png.
     The new image is converted in gray scale and saved in the dest_folder.
 
-    Args:
-        fname (str): Path to the input image with extension .pgm
-        dest_folder (directory): Destination folder in which save the new images with png extension.
+    Parameters
+    ----------
+    fname : str
+        Path to the input image with extension .pgm.
+    dest_folder : str
+        Destination folder in which save the new images with png extension.
+
+    Returns
+    -------
+    None
+
+    Examples
+    --------
+    >>> TRAIN_PATH = 'path/to/train/folder/'
+    >>> TEST_PATH = 'path/to/train/folder/'
+    >>> for data_path in [TRAIN_PATH, TEST_PATH]: 
+    >>>     for path, folders, fnames in os.walk(data_path):
+    >>>         for fname in fnames:
+    >>>             abs_path = os.path.join(path, fname)
+    >>>             dest_folder = path.replace('Train', 'Train_png').replace('Test', 'Test_png')
+    >>>             convert_to_png(abs_path, dest_folder)
+
     """
     
     if not os.path.exists(dest_folder):
