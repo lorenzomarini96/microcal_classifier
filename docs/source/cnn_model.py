@@ -1,23 +1,5 @@
 """Convolutional neural network model for MCs classification."""
 
-import logging
-
-# Layers needed in a CNN
-from keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from keras.models import Sequential
-
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-
-formatter = logging.Formatter("%(levelname)s:%(name)s:%(message)s")
-
-file_handler = logging.FileHandler("CNN_model.log")
-file_handler.setFormatter(formatter)
-
-logger.addHandler(file_handler)
-
-
 def cnn_classifier(shape=(60, 60, 1), verbose=False):
     # pylint: disable=W0613
     """
