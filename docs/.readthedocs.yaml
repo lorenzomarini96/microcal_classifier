@@ -28,3 +28,6 @@ python:
   install:
     - method: pip
       path: .
+
+python:
+   setup_py_install: true
