@@ -200,6 +200,7 @@ def split_dataset(X_train, y_train, X_test, y_test, perc=0.2, verbose=True):
 
     return X_train, X_val, y_train, y_val
 
+'''
 if __name__ == '__main__':
 
     TRAIN_DATASET_PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/Train'
@@ -213,3 +214,4 @@ if __name__ == '__main__':
     #count_labels(y_train, y_test, verbose=True)
     #plot_random_image(X_train, y_train, nx=3, ny=3)
     split_dataset(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, perc=0.25, verbose=True)
+'''
