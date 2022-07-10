@@ -4,6 +4,7 @@ import logging
 import os
 
 import matplotlib.pyplot as plt
+import numpy as np
 import PIL
 from tensorflow import keras
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
@@ -56,12 +57,41 @@ def convert_to_png(fname, dest_folder):
     PIL.Image.open(fname).convert('L').save(dest_fname) # L (8-bit pixels, black and white)
 
 
-def data_aug(train_dataset_path, batch_size=32):
-    """Data augmentation.
+def data_aug(train_dataset_path, img_width=60, img_height=60, batch_size=32):
     """
-    #train_dataset_path = '/content/gdrive/MyDrive/DATASETS_experim/IMAGES/Mammography_micro/Train_png'
-    batch_size = 32
-    img_width, img_height = (60, 60)
+    Data augmentation procedure.
+
+    Parameters
+    ----------
+    train_dataset_path : str
+        Path to the input train data set.
+    img_width : int
+        X-dimension of the image
+    img_height : int
+        Y-dimension of the image
+    batch_size : int
+        Batch size
+
+    Returns
+    -------
+    train_gen : ???
+        Generated train data set.
+    val_gen : ???
+        Generated validation set.
+
+    Examples
+    --------
+    >>> TRAIN_PATH = 'path/to/train/folder/'
+    >>> IMG_WIDTH = 60
+    >>> IMG_HEIGHT = 60
+    >>> BATCH_SIZE = 32
+    >>> data_aug(train_dataset_path=TRAIN_PATH,
+                 img_width=IMG_WIDTH,
+                 img_height=IMG_HEIGHT,
+                 batch_size=BATCH_SIZE
+                 )
+ 
+    """
 
     train_datagen = ImageDataGenerator(
         rotation_range=40,
@@ -91,21 +121,33 @@ def data_aug(train_dataset_path, batch_size=32):
 
 
 def single_image_aug(image_path, show=True):
-    """Function to show the effect of the data aumentation procedure --based on ImageDataGenerator-- 
-    on the singole image given in input.
-
-    Args:
-        image_path (str): Path to the input image.
-        show (bool, optional): Allow to show the multi plots. Defaults to True.
     """
+    Show the effect of the data aumentation procedure --based on ImageDataGenerator-- 
+    showing a given single image.
 
-    #image_path = '/content/gdrive/MyDrive/DATASETS_experim/IMAGES/Mammography_micro/Train_png/1/0042t1_1_1_1.png_2.png'
+    Parameters
+    ----------
+    image_path : str
+        Path to the input train data set.
+    show : bool
+        If True, show the tranformed imags.
+
+    Returns
+    -------
+    None
+    
+    Examples
+    --------
+    
+    >>> IMAGE_PATH = 'path/to/input/image/'
+    >>> single_image_aug(image_path, show=True)
+    
+    """
 
     img = keras.preprocessing.image.load_img(image_path, target_size=(60, 60, 1))
     img = keras.preprocessing.image.img_to_array(img)
     img = np.expand_dims(img, axis=0)
 
-    # Uses ImageDataGenerator to flip the images
     datagen = ImageDataGenerator(
         rotation_range=40,
         width_shift_range=0.2,
