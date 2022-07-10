@@ -25,11 +25,17 @@ sys.path.insert(0, os.path.join(package_root, package_name))
 autodoc_mock_imports = ["numpy",
                         "matplotlib",
                         "matplotlib.pyplot",
+                        "matplotlib.gridspec",
+                        "skimage",
+                        "skimage.io.imread"
                         "skimage.io",
                         "pandas",
                         "sklearn",
                         "sklearn.model_selection",
-                        "skimage.io"
+                        "sklearn.model_selection.train_test_split"
+                        "skimage.io",
+                        "keras",
+                        "keras.models"
                         ]
 
 # -- Project information -----------------------------------------------------
