@@ -35,7 +35,12 @@ autodoc_mock_imports = ["numpy",
                         "sklearn.model_selection.train_test_split"
                         "skimage.io",
                         "keras",
-                        "keras.models"
+                        "keras.models",
+                        "PIL",
+                        "keras.preprocessing.image.ImageDataGenerator",
+                        "keras.preprocessing.image.array_to_img",
+                        "keras.preprocessing.image.array_to_img.img_to_array",
+                        "keras.preprocessing.image.array_to_img.load_img"
                         ]
 
 # -- Project information -----------------------------------------------------
