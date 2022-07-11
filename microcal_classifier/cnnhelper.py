@@ -199,17 +199,22 @@ def read_imgs(dataset_path, classes):
     """Function reading all the images in a given folder which already contains
     two subfolder.
 
-    Args:
-        dataset_path (str): Path to the image folder.
-        classes (list): _description_
+    Parameters
+    ----------
+        dataset_path : str
+            Path to the image folder.
+        classes : list
+            0 and 1 mean normal tissue and microcalcification clusters, respectively.
 
-    Returns:
-        array: Numpy array containing the value of image/label.
+    Returns
+    -------
+        array: numpy_array
+            Array containing the value of image/label.
 
-    Examples:
-        >>> TRAIN_DATA_PATH = '/path/to/train/folder'
-        >>> x_train, y_train = read_imgs(TRAIN_DATA_PATH, [0, 1])
-
+    Examples
+    --------
+    >>> TRAIN_DATA_PATH = '/path/to/train/folder'
+    >>> x_train, y_train = read_imgs(TRAIN_DATA_PATH, [0, 1])
     """
     tmp = []
     labels = []
@@ -229,19 +234,39 @@ def read_imgs(dataset_path, classes):
 def split_dataset(X_train, y_train, X_test, y_test, perc=0.2, verbose=True):
     """Split the train dataset for train and validation set.
 
-    Args:
-        X_train (numpy_array): Images of train set.
-        y_train (numpy_array): Labels of train set.
-        X_test (numpy_array): Images of test set.
-        y_test (numpy_array): Labels of test set.
-        perc (float): Percentual of items for the validation set.
+    Parameters
+    ----------
+        X_train : numpy_array
+            Images of train set.
+        y_train : numpy_array
+            Labels of train set.
+        X_test : numpy_array
+            Images of test set.
+        y_test : numpy_array
+            Labels of test set.
+        perc : float
+            Percentual of items for the validation set.
 
-    Returns:
-        array: Numpy arrays containing...
-
+    Returns
+    -------
+        X_train_split : numpy_array
+            Split images data set for training.
+        X_val : numpy_array
+            Image data set for validation.
+        y_train_split : numpy_array
+            Split label data set for training.
+        y_val : numpy_array
+            Label data set for validation.
+    
+    Examples
+    --------
+    >>> X_train, x_val, y_train, y_val = train_test_split(X_train, y_train,
+    >>>                                                   test_size = 0.25,
+    >>>                                                   random_state = 11
+    >>>                                                   )
     """
 
-    X_train, X_val, y_train, y_val = train_test_split(
+    X_train_split, X_val, y_train_split, y_val = train_test_split(
         X_train, y_train,
         test_size=perc,
         random_state=11
@@ -264,10 +289,36 @@ def split_dataset(X_train, y_train, X_test, y_test, perc=0.2, verbose=True):
     if verbose:
         print(data.to_string(index=False))
 
-    return X_train, X_val, y_train, y_val
+    return X_train_split, X_val, y_train_split, y_val
 
 
+#=======================================
+# TRAIN
+#=======================================
 
+#=======================================
+# LOSS PLOT
+#=======================================
+
+#=======================================
+# ACCURACY PLOT
+#=======================================
+
+#=======================================
+# CONFUSION MATRIX
+#=======================================
+
+#=======================================
+# ROC CURVE
+#=======================================
+
+#=======================================
+# CORRECT CLASSIFIED
+#=======================================
+
+#=======================================
+# INCORRECT CLASSIFIED
+#=======================================
 
 
 if __name__ == '__main__':

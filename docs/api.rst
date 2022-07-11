@@ -1,8 +1,6 @@
 API documentation
 =================
 
-Scrittura di testo su api. Vediamo se readthedocs aggiorna.
-
 
 cnn_model
 ---------
