@@ -41,35 +41,22 @@ def cnn_classifier(shape=(60, 60, 1), verbose=False):
     >>> V_PIXEL_SIZE = 60
     >>> CHANNEL = 1
     >>> model = cnn_classifier(shape=(H_PIXEL_SIZE, V_PIXEL_SIZE, CHANNEL), verbose=True)
-
     Model: "sequential"
     _________________________________________________________________
     Layer (type)                Output Shape              Param #
     =================================================================
     conv_1 (Conv2D)             (None, 60, 60, 32)        320
-
     maxpool_1 (MaxPooling2D)    (None, 30, 30, 32)        0
-
     conv_2 (Conv2D)             (None, 30, 30, 64)        18496
-
     maxpool_2 (MaxPooling2D)    (None, 15, 15, 64)        0
-
     conv_3 (Conv2D)             (None, 15, 15, 128)       73856
-
     maxpool_3 (MaxPooling2D)    (None, 7, 7, 128)         0
-
     conv_4 (Conv2D)             (None, 7, 7, 128)         147584
-
     maxpool_4 (MaxPooling2D)    (None, 3, 3, 128)         0
-
     flatten (Flatten)           (None, 1152)              0
-
     dropout (Dropout)           (None, 1152)              0
-
     dense_1 (Dense)             (None, 512)               590336
-
     dense_2 (Dense)             (None, 128)               65664
-
     output (Dense)              (None, 1)                 129
     =================================================================
     Total params: 896,385
