@@ -66,9 +66,11 @@ DATASETS
             └── 1
 ```
 
-<img src="docs/images/mammo_images.png" width="500"> 
+The DATASETS folder can be downloaded from ???
 
-The DATASETS folder can be downloaded from 
+Some random images:
+
+<img src="docs/images/random_images.png" width="500"> 
 
 To define the train and validation set we can use the function **train_test_split**, which split the labels into random train and validation subsets by proportions.
 
@@ -201,11 +203,11 @@ Confusion matrix obtained CNN model (on the left) and with data augmentation (on
 
 ### Correct classification samples
 
-<img src="docs/images/correct_predict_test.png" width="700">
+<img src="docs/images/correct_predict_test.png" width="750">
 
 ### Incorrect classification samples
 
-<img src="docs/images/mis_predict_test.png" width="700">
+<img src="docs/images/mis_predict_test.png" width="750">
 
 
 # Conclusions
