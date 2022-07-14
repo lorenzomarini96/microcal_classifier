@@ -140,6 +140,7 @@ Train and test sets can be swapped in a cross validation procedure.
 
 <img src="docs/images/cv_scikit.png" width="500"> 
 
+Image from https://scikit-learn.org/stable/modules/cross_validation.html
 # Results
 
 ## Performance evaluation
