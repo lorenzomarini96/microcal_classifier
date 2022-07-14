@@ -132,12 +132,13 @@ _________________________________________________________________
 
 ## Data augmentation
 
-
 <img src="docs/images/data_aug_image.png" width="500">
 
 ## Cross validation procedures
 
 Train and test sets can be swapped in a cross validation procedure.
+
+<img src="docs/images/cv_scikit.png" width="500"> 
 
 # Results
 
