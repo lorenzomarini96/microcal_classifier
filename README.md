@@ -18,7 +18,9 @@ microcal_classifier/
 │   ├── index.rst
 │   ├── make.bat
 │   ├── Makefile
-│   └── requirements.txt
+│   ├── requirements.txt
+│   ├── wavelet_coeff.rst
+│   └── wavelethelper.rst
 ├── LICENSE
 ├── microcal_classifier
 │   ├── cnnhelper.py
@@ -27,6 +29,8 @@ microcal_classifier/
 │   ├── data_augmentation.py
 │   ├── __init__.py
 │   ├── micro_classifier.py
+│   ├── wavelet_coeff.py
+│   └── wavelethelper.py
 ├── README.md
 ├── requirements.txt
 ├── setup.py
@@ -35,6 +39,7 @@ microcal_classifier/
     ├── Makefile
     └── test_microcal.py
 ```
+
 # Motivations
 
 Cluster of microcalcifications can be an early sign of breast cancer. In this python package, an approach based on convolutional neural networks (CNN) for the classification of microcalcification clusters is proposed.
@@ -141,6 +146,13 @@ Train and test sets can be swapped in a cross validation procedure.
 <img src="docs/images/cv_scikit.png" width="500"> 
 
 Image from https://scikit-learn.org/stable/modules/cross_validation.html
+
+# Binary classification based on wavelet coefficients of the images
+
+
+
+
+
 # Results
 
 ## Performance evaluation
@@ -170,8 +182,6 @@ $F1 = \frac{2 \times PR \times Recall}{PR + Recall}$
 | CNN cross validation | Train      |               |       |           |          |          |        
 |                      | Test       |               |       |           |          |          |        
 |                      |            |               |       |           |          |          |        
-| ML  Wavelet          | Train      |               |       |           |          |          |        
-|                      | Test       |               |       |           |          |          |     
 
 
 ### Train, validation, test: loss and accuracy
@@ -183,8 +193,6 @@ $F1 = \frac{2 \times PR \times Recall}{PR + Recall}$
 | CNN data agu         |            |               |          |           |           |          |
 |                      |            |               |          |           |           |          |
 | CNN cross validation |            |               |          |           |           |          |
-|                      |            |               |          |           |           |          |
-| ML                   |            |               |          |           |           |          |
 |                      |            |               |          |           |           |          |
 
 
