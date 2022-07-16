@@ -27,6 +27,7 @@ autodoc_mock_imports = ["numpy",
                         "matplotlib.pyplot",
                         "matplotlib.image",
                         "matplotlib.gridspec",
+                        "multiprocessing",
                         "skimage",
                         "skimage.io.imread"
                         "skimage.io",

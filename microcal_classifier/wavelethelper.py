@@ -34,11 +34,11 @@ def plot_dcw(verbose=True, show=True):
     --------
 
     >>> plot_dcw(verbose=True, show=True)
-    >>> ['Haar', 'Daubechies', 'Symlets', 'Coiflets', 'Biorthogonal',
-    >>> 'Reverse biorthogonal', 'Discrete Meyer (FIR Approximation)',
-    >>> 'Gaussian', 'Mexican hat wavelet', 'Morlet wavelet',
-    >>> 'Complex Gaussian wavelets', 'Shannon wavelets',
-    >>> 'Frequency B-Spline wavelets', 'Complex Morlet wavelets']
+    ['Haar', 'Daubechies', 'Symlets', 'Coiflets', 'Biorthogonal',
+    'Reverse biorthogonal', 'Discrete Meyer (FIR Approximation)',
+    'Gaussian', 'Mexican hat wavelet', 'Morlet wavelet',
+    'Complex Gaussian wavelets', 'Shannon wavelets',
+    'Frequency B-Spline wavelets', 'Complex Morlet wavelets']
     """
 
     discrete_wavelets = ['db5', 'sym5', 'coif5', 'bior2.4']
@@ -141,15 +141,15 @@ def wavelet_info(family):
     --------
 
     >>> wavelet_info('db5')
-    >>> Wavelet db5
-    >>> Family name:    Daubechies
-    >>> Short name:     db
-    >>> Filters length: 10
-    >>> Orthogonal:     True
-    >>> Biorthogonal:   True
-    >>> Symmetry:       asymmetric
-    >>> DWT:            True
-    >>> CWT:            False
+    Wavelet db5
+    Family name:    Daubechies
+    Short name:     db
+    Filters length: 10
+    Orthogonal:     True
+    Biorthogonal:   True
+    Symmetry:       asymmetric
+    DWT:            True
+    CWT:            False
     """
 
     # Create a Wavelet object
@@ -188,10 +188,10 @@ def show_img_coeff(img__path, family, level, verbose=True):
     >>>                         family=FAMILY,
     >>>                         level=LEVEL,
     >>>                         verbose=True)
-    >>> cA : (12, 12)
-    >>> cH : (12, 12)
-    >>> cV : (12, 12)
-    >>> cD : (12, 12)
+    cA : (12, 12)
+    cH : (12, 12)
+    cV : (12, 12)
+    cD : (12, 12)
     """
 
     image = mpimg.imread(img__path)
