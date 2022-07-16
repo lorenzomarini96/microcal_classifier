@@ -1,7 +1,20 @@
+# pylint: disable=invalid-name, redefined-outer-name, import-error
+
 """Module prodiving some useful function for plot and visualization of wavelet transformation."""
 
+#import os
+#import glob
+
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import numpy as np
+from PIL import Image
 import pywt
+from pywt._doc_utils import wavedec2_keys, draw_2d_wp_basis
+#import skimage
+from skimage.io import imread
+
+
 
 def plot_dcw(verbose=True, show=True):
     # pylint: disable=R0914
@@ -17,7 +30,7 @@ def plot_dcw(verbose=True, show=True):
     Returns
     -------
     fig : Figure
-        Figure
+        Figure showing the discrete and continuous wavelet families.
 
     Examples
     --------
@@ -67,9 +80,10 @@ def plot_dcw(verbose=True, show=True):
 
     return fig
 
+
 def plot_daubechies(show=True):
     # pylint: disable=E1101
-    """Plot discrete and continuous wavelet families.
+    """Plot the first 5 levels of Daubechies wavelet families.
 
     Parameters
     ----------
@@ -79,19 +93,18 @@ def plot_daubechies(show=True):
     Returns
     -------
     fig : Figure
-        Figure
+        Figure showing the first 5 levels of Daubechies wavelet families.
 
     Examples
     --------
 
     >>> plot_dcw(verbose=True, show=True)
-
     """
 
     db_wavelets = pywt.wavelist('db')[:5]
 
-    fig, axarr = plt.subplots(ncols=5, nrows=5, figsize=(16,16))
-    fig.suptitle('Daubechies family of wavelets', fontsize=16)
+    fig, axarr = plt.subplots(ncols=5, nrows=5, figsize=(8,8))
+    fig.suptitle('Daubechies family of wavelets', fontsize=10)
     for col_no, waveletname in enumerate(db_wavelets):
         wavelet = pywt.Wavelet(waveletname)
         no_moments = wavelet.vanishing_moments_psi
@@ -101,7 +114,7 @@ def plot_daubechies(show=True):
             f'\n{no_moments} vanishing moments\n'
             f'{len(x_values)} samples',
              loc='left')
-            axarr[row_no, col_no].plot(x_values, wavelet_function, 'bD--')
+            axarr[row_no, col_no].plot(x_values, wavelet_function, '-')
             axarr[row_no, col_no].set_yticks([])
             axarr[row_no, col_no].set_yticklabels([])
     plt.tight_layout()
@@ -112,5 +125,207 @@ def plot_daubechies(show=True):
 
     return fig
 
+
+def wavelet_info(family):
+    """Print a brief information about the wavelet family
+    and some properties like orthogonality and symmetry.
+
+    Parameters
+    ----------
+    family : str
+        Name of wavelet families.
+
+    Returns
+    -------
+    None
+
+    Examples
+    --------
+
+    >>> wavelet_info('db5')
+    >>> Wavelet db5
+    >>> Family name:    Daubechies
+    >>> Short name:     db
+    >>> Filters length: 10
+    >>> Orthogonal:     True
+    >>> Biorthogonal:   True
+    >>> Symmetry:       asymmetric
+    >>> DWT:            True
+    >>> CWT:            False
+    """
+
+    # Create a Wavelet object
+    wave = pywt.Wavelet(family)
+    print(wave)
+
+
+def show_img_coeff(img__path, family, level, verbose=True):
+    # pylint: disable=C0103
+    """Show the approximation, horizontal detail, vertical detail,
+    diagonal detail coefficient of a given level obtained applying
+    the multilevel 2D Discrete Wavelet Transform of a given family on the input image.
+
+    Parameters
+    ----------
+    img__path : str
+       Path to the input image
+
+    family : str
+        Name of wavelet families.
+
+    level : int
+        Level of decomposition.
+
+    Returns
+    -------
+    fig : Figure
+
+    Examples
+    --------
+
+    >>> IMG_PATH = "/path/to/image/img.pgm"
+    >>> FAMILY = "db5"
+    >>> LEVEL = 4
+    >>> show_img_coeff(img__path=IMG_PATH,
+    >>>                         family=FAMILY,
+    >>>                         level=LEVEL,
+    >>>                         verbose=True)
+    >>> cA : (12, 12)
+    >>> cH : (12, 12)
+    >>> cV : (12, 12)
+    >>> cD : (12, 12)
+    """
+
+    image = mpimg.imread(img__path)
+
+    image_array = Image.fromarray(image , 'L')
+    resize_img = image_array.resize((60 , 60))
+
+    # Multilevel 2D Discrete Wavelet Transform
+    # (https://pywavelets.readthedocs.io/en/latest/ref/2d-dwt-and-idwt.html)
+    if level==1:
+        cA, (cH, cV, cD) = pywt.wavedec2(resize_img, family, level=1)
+
+    if level==2:
+        #cA, (cH2, cV2, cD2), (cH1, cV1, cD1) = pywt.wavedec2(resize_img, family, level=2)
+        cA, (cH, cV, cD), (_, _, _)  = pywt.wavedec2(resize_img, family, level=2)
+
+    if level==3:
+        #cA, (cH3, cV3, cD3), (cH2, cV2, cD2), (cH1, cV1, cD1) = pywt.wavedec2(resize_img, family, level=3)
+        cA, (cH, cV, cD), (_, _, _), (_, _, _) = pywt.wavedec2(resize_img, family, level=3)
+
+    if level==4:
+        #cA, (cH4, cV4, cD4), (cH3, cV3, cD3), (cH2, cV2, cD2), (cH1, cV1, cD1) = pywt.wavedec2(resize_img, family, level=4)
+        cA, (cH, cV, cD), (_, _, _), (_, _, _), (_, _, _) = pywt.wavedec2(resize_img, family, level=4)
+
+    fig = plt.figure(figsize=(8, 8))
+    # Wavelet transform of image, and plot approximation and details
+    titles = [f'Approximation Coef. of Level {level}',
+              f'Horizontal Detail Coef. of Level {level}',
+              f'Vertical Detail Coef. of Level {level}',
+              f'Diagonal Detail Coef. of Level {level}'
+              ]
+    for i, a in enumerate([cA, cH, cV, cD]):
+        ax = fig.add_subplot(2, 2, i + 1)
+        ax.imshow(a, interpolation="nearest", cmap=plt.cm.gray)
+        ax.set_title(titles[i], fontsize=14)
+        ax.set_xticks([])
+        ax.set_yticks([])
+
+    fig.tight_layout()
+    plt.show()
+
+    if verbose:
+        print(f'cA : {cA.shape}\n'
+              f'cH : {cH.shape}\n'
+              f'cV : {cV.shape}\n'
+              f'cD : {cD.shape}\n'
+              )
+
+    return fig
+
+
+def plot_multi_dec(img__path, family, level):
+    # pylint: disable=C0103
+    # pylint: disable=E1101
+    """Show the effect of multi level decomposition on a given image.
+
+    Parameters
+    ----------
+    img__path : str
+       Path to the input image
+
+    family : str
+        Name of wavelet families.
+
+    level : int
+        Level of decomposition.
+
+    Returns
+    -------
+    fig : Figure
+
+    Examples
+    --------
+
+    >>> IMG_PATH = "/path/to/image/img.pgm"
+    >>> FAMILY = "db5"
+    >>> LEVEL = 4
+    >>> plot_multi_dec(img__path=IMG_PATH,
+    >>>                         family=FAMILY,
+    >>>                         level=LEVEL)
+    """
+    # Read input image
+    img = mpimg.imread(img__path)
+    shape = img.shape
+
+    max_lev = 4 # how many levels of decomposition to draw
+    label_levels = 4  # how many levels to explicitly label on the plots
+
+    fig, axes = plt.subplots(2, 5, figsize=[14, 8])
+    for level in range(0, max_lev + 1):
+        if level == 0:
+            # show the original image before decomposition
+            axes[0, 0].set_axis_off()
+            axes[1, 0].imshow(img, cmap=plt.cm.gray)
+            axes[1, 0].set_title('Image', fontsize=14)
+            axes[1, 0].set_axis_off()
+            continue
+
+        # plot subband boundaries of a standard DWT basis
+        draw_2d_wp_basis(shape,
+                        wavedec2_keys(level),
+                        ax=axes[0, level],
+                        label_levels=label_levels
+                        )
+        axes[0, level].set_title(f'{level} level\ndecomposition', fontsize=14)
+
+        # compute the 2D DWT
+        c = pywt.wavedec2(img, family, mode='periodization', level=level)
+        # normalize each coefficient array independently for better visibility
+        c[0] /= np.abs(c[0]).max()
+        for detail_level in range(level):
+            c[detail_level + 1] = [d/np.abs(d).max() for d in c[detail_level + 1]]
+        # show the normalized coefficients
+        arr, slices = pywt.coeffs_to_array(c)
+        axes[1, level].imshow(arr, cmap=plt.cm.gray)
+        axes[1, level].set_title(f'Coefficients\n{level} level', fontsize=14)
+        axes[1, level].set_axis_off()
+
+    plt.tight_layout()
+    plt.show()
+
+    return fig
+
+
 if __name__=='__main__':
+ 
     plot_dcw(verbose=True, show=True)
+    plot_daubechies(show=True)
+
+    IMG_PATH = '/home/lorenzomarini/Desktop/DATASETS_wavelets/IMAGES/Mammography_micro/Train/1/0006s1_1_1_1.pgm_1.pgm'
+    FAMILY = "db5"
+    LEVEL = 4
+    wavelet_info(family=FAMILY)
+    show_img_coeff(img__path=IMG_PATH, family=FAMILY, level=LEVEL, verbose=True)
+    plot_multi_dec(img__path=IMG_PATH, family=FAMILY, level=LEVEL)
