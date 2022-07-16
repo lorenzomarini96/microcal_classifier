@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.join(package_root, package_name))
 autodoc_mock_imports = ["numpy",
                         "matplotlib",
                         "matplotlib.pyplot",
+                        "matplotlib.image",
                         "matplotlib.gridspec",
                         "skimage",
                         "skimage.io.imread"
@@ -42,7 +43,8 @@ autodoc_mock_imports = ["numpy",
                         "keras.preprocessing.image.array_to_img.img_to_array",
                         "keras.preprocessing.image.array_to_img.load_img",
                         "tensorflow",
-                        "pywt"
+                        "pywt",
+                        "pywt._doc_utils"
                         ]
 
 # -- Project information -----------------------------------------------------

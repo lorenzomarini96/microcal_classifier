@@ -1,6 +1,7 @@
 # pylint: disable=invalid-name, redefined-outer-name, import-error
 
-"""Module prodiving some useful function for plot and visualization of wavelet transformation."""
+"""Module prodiving some useful function for plot and visualization
+of multilevel 2D Discrete Wavelet Transform."""
 
 #import os
 #import glob
@@ -11,9 +12,6 @@ import numpy as np
 from PIL import Image
 import pywt
 from pywt._doc_utils import wavedec2_keys, draw_2d_wp_basis
-#import skimage
-from skimage.io import imread
-
 
 
 def plot_dcw(verbose=True, show=True):
