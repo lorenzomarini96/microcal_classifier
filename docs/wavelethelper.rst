@@ -1,0 +1,5 @@
+wavelethelper
+-------------
+
+.. automodule:: wavelethelper
+   :members:
