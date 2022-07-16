@@ -130,7 +130,7 @@ def single_image_aug(image_path, show=True):
     image_path : str
         Path to the input train data set.
     show : bool
-        If True, show the tranformed imags.
+        If True, shows the tranformed imags.
 
     Returns
     -------
