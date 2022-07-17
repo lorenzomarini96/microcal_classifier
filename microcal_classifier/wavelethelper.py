@@ -32,7 +32,6 @@ def plot_dcw(verbose=True, show=True):
 
     Examples
     --------
-
     >>> plot_dcw(verbose=True, show=True)
     ['Haar', 'Daubechies', 'Symlets', 'Coiflets', 'Biorthogonal',
     'Reverse biorthogonal', 'Discrete Meyer (FIR Approximation)',
@@ -95,7 +94,6 @@ def plot_daubechies(show=True):
 
     Examples
     --------
-
     >>> plot_dcw(verbose=True, show=True)
     """
 
@@ -139,7 +137,6 @@ def wavelet_info(family):
 
     Examples
     --------
-
     >>> wavelet_info('db5')
     Wavelet db5
     Family name:    Daubechies
@@ -180,7 +177,6 @@ def show_img_coeff(img__path, family, level, verbose=True):
 
     Examples
     --------
-
     >>> IMG_PATH = "/path/to/image/img.pgm"
     >>> FAMILY = "db5"
     >>> LEVEL = 4
@@ -265,7 +261,6 @@ def plot_multi_dec(img__path, family, level):
 
     Examples
     --------
-
     >>> IMG_PATH = "/path/to/image/img.pgm"
     >>> FAMILY = "db5"
     >>> LEVEL = 4
