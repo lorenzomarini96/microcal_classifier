@@ -1,3 +1,5 @@
+# pylint: disable=W0611
+# pylint: disable=E0401
 """CMEPDA Project: Image binary classification using wavelet transform.
 
 This python script evaluates the performance of the most common methods
@@ -32,15 +34,14 @@ import multiprocessing as mp
 from pathlib import Path
 import sys
 
-from PIL import Image
-import skimage
-from skimage import img_as_float
-from skimage.io import imread
+#from PIL import Image
+#import skimage
+#from skimage import img_as_float
+#from skimage.io import imread
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import pywt
-from sklearn.ensemble import RandomForestClassifier
+#import pywt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn import metrics
@@ -57,7 +58,7 @@ from sklearn.metrics import roc_auc_score, roc_curve, auc
 from sklearn.model_selection import StratifiedKFold
 
 from wavelet_coeff import dwt_coeff_array
-from wavelethelper import read_img
+from wavelethelper import read_img, plot_cv_roc
 
 sys.path.insert(0, str(Path(os.getcwd()).parent))
 
@@ -98,7 +99,7 @@ if __name__ == '__main__':
     #==================================================
     WAVELET = 'db5'
     LEVEL = 4
-    partial = True
+    PARTIAL = True
 
     # Defines a list to put all coefficients in
     coefficients = []
@@ -108,14 +109,14 @@ if __name__ == '__main__':
         array = dwt_coeff_array(X_tot[i],
                                 wavelet=WAVELET,
                                 level=LEVEL,
-                                partial=partial
+                                partial=PARTIAL
                                 )
         coefficients.append(array)
 
     # Converts the list to a numpy array
     coefficients = np.array(coefficients)
     print(coefficients.shape)
-    
+
     #==================================================
     # STEP 3: BINARY CLASSIFICATION
     #==================================================
@@ -131,7 +132,7 @@ if __name__ == '__main__':
     # 75% of data for training and 25% for testing.
     X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
 
-    
+
     # Step 3.3: Normalize the data for numerical stability
     #-----------------------------------------------------
     ss_train = StandardScaler()
@@ -151,7 +152,7 @@ if __name__ == '__main__':
     # Support Vector Machines
     models['Support Vector Machines'] = LinearSVC()
 
-    # Decision Trees   
+    # Decision Trees
     models['Decision Trees'] = DecisionTreeClassifier()
 
     # Random Forest
@@ -186,7 +187,7 @@ if __name__ == '__main__':
 
         # Calculate metrics
         accuracy[key] = accuracy_score(predictions, y_test)
-        precision[key] = precision_score(predictions, y_test)    
+        precision[key] = precision_score(predictions, y_test)
         recall[key] = recall_score(predictions, y_test)
         #roc_auc[key] = roc_auc_score(predictions, y_test)
 
@@ -211,16 +212,22 @@ if __name__ == '__main__':
     # Plot a bar chart to compare the classifiers' performance:
     ax = df_model.plot.barh(figsize=(8, 5))
     ax.legend(
-        ncol=len(models.keys()), 
-        bbox_to_anchor=(0, 1), 
-        loc='lower left', 
+        ncol=len(models.keys()),
+        bbox_to_anchor=(0, 1),
+        loc='lower left',
         prop={'size': 15}
     )
     plt.tight_layout()
     plt.yticks(fontsize=15)
     plt.xticks(fontsize=15)
     plt.show()
-    
+
     #==================================================
-    # STEP 4: K-FOLD CROSS VALIDATION 
+    # STEP 4: K-FOLD CROSS VALIDATION
     #==================================================
+
+    classifier = RandomForestClassifier(n_estimators=100)
+    plot_cv_roc(X, y, classifier, 5)
+
+    #for key in models.keys():
+    #    plot_cv_roc(X, y, models[key], 5)
