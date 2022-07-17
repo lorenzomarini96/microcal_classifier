@@ -19,7 +19,7 @@ import numpy as np
 import pywt
 
 
-def dwtcoefftoarray(image, wavelet, level, partial=False):
+def dwt_coeff_array(image, wavelet, level, partial=False):
     '''
     This function collects all the coefficients of the 2DWT and converts them
     in a flat numpy array which can be passed to the binary classifier.
@@ -50,7 +50,7 @@ def dwtcoefftoarray(image, wavelet, level, partial=False):
     >>> FAMILY = 'db5'
     >>> LEVEL = 4
     >>> IMAGE = Image.open(IMAGE_PATH)
-    >>> wavecoeffs = dwtcoefftoarray(image=IMAGE, wavelet=FAMILY, level=LEVEL, partial=False)
+    >>> wavecoeffs = dwt_coeff_array(image=IMAGE, wavelet=FAMILY, level=LEVEL, partial=False)
     '''
 
     coeffs = pywt.wavedec2(image, wavelet, level=level)
@@ -69,9 +69,7 @@ def dwtcoefftoarray(image, wavelet, level, partial=False):
         thirdlevelcoeffs = np.concatenate((infocoeffs[0][infocoeffs[1][-3]['da']],
                                            infocoeffs[0][infocoeffs[1][-3]['ad']],
                                            infocoeffs[0][infocoeffs[1][-3]['dd']]))
-
         if level == 3:
-
             wavecoeffs = np.concatenate((secondlevelcoeffs, thirdlevelcoeffs))
 
         elif level == 4:
@@ -81,7 +79,6 @@ def dwtcoefftoarray(image, wavelet, level, partial=False):
             wavecoeffs = np.concatenate((secondlevelcoeffs,
                                          thirdlevelcoeffs,
                                          fourthlevelcoeffs))
-
         else:
             pass
 

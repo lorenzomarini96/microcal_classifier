@@ -1,10 +1,13 @@
 # pylint: disable=invalid-name, redefined-outer-name, import-error
+# pylint: disable=C0301
+# pylint: disable=E1101
 
 """Module prodiving some useful function for plot and visualization
 of multilevel 2D Discrete Wavelet Transform."""
 
-#import os
-#import glob
+import os
+import glob
+import multiprocessing as mp
 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
@@ -311,8 +314,51 @@ def plot_multi_dec(img__path, family, level):
     return fig
 
 
+def read_img(image_path):
+    '''Takes as input the path to the image folder and
+    returns the numpy array of image and label found in that folder.
+
+    Parameters
+    ----------
+    image_path : str
+       Path to the input image.
+
+    Returns
+    -------
+    images : numpy array
+        Numpy array of read image.
+
+    y_np : numpy array
+        Numpy array of read label.
+
+    Examples
+    --------
+    >>> IMG_PATH = "/path/to/image/"
+    >>> read_img(image_path=IMG_PATH)
+    '''
+
+    # Creating a list of all image names found in image_path
+    imagefilename = glob.glob(os.path.join(image_path, '*.pgm'))
+
+    # Defining 4 sub-processes and apply Immage.open to all the images found
+    pool = mp.Pool(processes=4)
+    results = pool.map_async(Image.open, imagefilename)
+
+    # Gets the list of images
+    images = results.get()
+
+    #logger.info(f'Num images found in {image_path}: {len(images)}')
+
+    # Creates the list of corrisponding labels and convert it to numpy array
+    label = os.path.basename(image_path)
+    y = [int(label)] * len(images)
+    y_np = np.array(y)
+
+    return images, y_np
+
+
 if __name__=='__main__':
- 
+
     plot_dcw(verbose=True, show=True)
     plot_daubechies(show=True)
 
