@@ -129,11 +129,11 @@ def plot_daubechies(show=True):
 
 def plot_cv_roc(X, y, classifier, n_splits=5):
     """
-    Trains the classifier on X data with y labels and implements the
-    k-fold-CV with k=n_splits. It plots the ROC curves for each k fold
-    and their average and displays the corresponding AUC values
+    Train the classifier on X data with y labels and implement the
+    k-fold-CV with k=n_splits. Plot the ROC curves for each k fold
+    and their average and display the corresponding AUC values
     and the standard deviation over the k folders.
-    
+
     Parameters
     ----------
     X : numpy array
@@ -162,7 +162,7 @@ def plot_cv_roc(X, y, classifier, n_splits=5):
         X = X.to_numpy()
     except AttributeError:
         pass
- 
+
     cv = StratifiedKFold(n_splits)
 
     tprs = [] #True positive rate
@@ -178,7 +178,7 @@ def plot_cv_roc(X, y, classifier, n_splits=5):
         y_test_pred = model.predict(X[test])
 
         # Compute ROC curve and area under the curve
-        fpr, tpr, thresholds = roc_curve(y[test], y_test_pred)
+        fpr, tpr, _ = roc_curve(y[test], y_test_pred)
         interp_tpr = interp(interp_fpr, fpr, tpr)
         tprs.append(interp_tpr)
 
@@ -194,7 +194,7 @@ def plot_cv_roc(X, y, classifier, n_splits=5):
 
     plt.figure()
     plt.plot([0, 1], [0, 1],
-            linestyle='--', 
+            linestyle='--',
             lw=2,
             color='r',
             label='Chance',
@@ -409,7 +409,7 @@ def plot_multi_dec(img__path, family, level):
         for detail_level in range(level):
             c[detail_level + 1] = [d/np.abs(d).max() for d in c[detail_level + 1]]
         # show the normalized coefficients
-        arr, slices = pywt.coeffs_to_array(c)
+        arr, _ = pywt.coeffs_to_array(c)
         axes[1, level].imshow(arr, cmap=plt.cm.gray)
         axes[1, level].set_title(f'Coefficients\n{level} level', fontsize=14)
         axes[1, level].set_axis_off()
