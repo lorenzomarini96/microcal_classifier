@@ -34,6 +34,7 @@ autodoc_mock_imports = ["numpy",
                         "pandas",
                         "sklearn",
                         "sklearn.model_selection",
+                        "sklearn.metrics ",
                         "sklearn.model_selection.train_test_split"
                         "skimage.io",
                         "keras",
