@@ -169,31 +169,49 @@ $Sensitivity = \frac{TP}{TP + FN}$
 $F1 = \frac{2 \times PR \times Recall}{PR + Recall}$
 
 
-### Precision, Recall and F1-Score
+## CNN: Precision, Recall and F1-Score
 
 | Model                | Class      | Precision     | Recall|  F1-score | Accuracy | AUC      |
 | -------------------- | ---------- | ------------- | ----- | --------- | -------- | -------- |
-| CNN                  | Train      |               |       |           |          |          |       
-|                      | Test       |               |       |           |          |          |        
+|                      |            |               |       |           |          |          |
+| CNN                  | 0          |   0.89        |  0.96 | 0.93      |  0.92    | 0.98     |       
+|                      | 1          |   0.96        |  0.87 | 0.91      |          |          |        
 |                      |            |               |       |           |          |          |        
-| CNN data agu         | Train      |               |       |           |          |          |        
-|                      | Test       |               |       |           |          |          |        
-|                      |            |               |       |           |          |          |        
-| CNN cross validation | Train      |               |       |           |          |          |        
-|                      | Test       |               |       |           |          |          |        
-|                      |            |               |       |           |          |          |        
+| CNN data agu         | 0          |   0.88        | 0.99  | 0.93      |  0.93    |  0.98    |        
+|                      | 1          |   0.99        | 0.86  | 0.92      |          |          |      
+
+## Machine Learning: Precision, Recall and F1-Score
+
+Moreover, we evaluates the performance of the most common methods utilized in machine learning for binary classification.
+The mammographic images containing either microcalcifications or normal tissue are represented in terms of wavelet coefficients.
+
+The most common methods in ML to binary classification:
+
+- Support Vector Machines
+- Naive Bayes
+- Nearest Neighbor
+- Decision Trees
+- Logistic Regression
+- Neural Networks
+- Random Forest
+- Multi-layer Perceptron
 
 
-### Train, validation, test: loss and accuracy
+<img src="docs/images/ML_comparisons.png" width="400">
 
-| Model                | Train Loss | Train Acc     | Val Loss | Val Acc   | Test Loss | Test Acc |  
-| -------------------- | ---------- | ------------- | ---------| --------- | --------- | -------- |
-| CNN                  |            |               |          |           |           |          |
-|                      |            |               |          |           |           |          |
-| CNN data agu         |            |               |          |           |           |          |
-|                      |            |               |          |           |           |          |
-| CNN cross validation |            |               |          |           |           |          |
-|                      |            |               |          |           |           |          |
+
+## CNN: Train, validation, test: loss and accuracy
+
+| Model                | Train Loss    | Train Acc     | Val Loss     | Val Acc      | Test Loss     | Test Acc      |  
+| -------------------- | ------------- | ------------- | ------------ | ------------ | ------------- | ------------- |
+|                      |               |               |              |              |               |               |
+| CNN                  |  0.17         |  0.93         |  0.23        | 0.91         |  0.21         | 0.92          |
+|                      |               |               |              |              |               |               |
+| CNN data agu         | 0.24          | 0.91          | 0.30         | 0.89         | 0.241         | 0.93          |
+|                      |               |               |              |              |               |               |
+| CNN cross validation | 0.27 +/- 0.14 |0.90 +/- 0.05  |0.31 +/- 0.14 |0.87 +/- 0.05 | 0.27 +/- 0.15 | 0.89 +/- 0.07 |
+
+
 
 
 ## Loss/Accuracy vs Epoch
@@ -206,10 +224,13 @@ Confusion matrix obtained CNN model (on the left) and with data augmentation (on
 
 <img src="docs/images/confusion_matrix.png" width="280">    <img src="docs/images/confusion_matrix_aug.png" width="280">
 
-### ROC Curves
+## CNN: ROC Curves
 
 <img src="docs/images/roc_curve.png" width="260"><img src="docs/images/roc_curve_aug.png" width="310"><img src="docs/images/roc_curve_mean_cv.png" width="325">
 
+## Random Forest: ROC Curves
+
+<img src="docs/images/mean_roc_curve_RF.png" width="350">
 
 ### Correct classification samples
 
@@ -220,8 +241,19 @@ Confusion matrix obtained CNN model (on the left) and with data augmentation (on
 <img src="docs/images/mis_predict_test.png" width="750">
 
 
-# Conclusions
+# How to use
 
+## Method 1 (local)
+
+- **step 1**: Download the repository from github
+- **step 2**: Download the image data set from ??
+- **step 3**: Change directory:
+- **Step 4**: Type:
+
+## Method 2 (demo)
+- **step 1**: Open the jupyter notebook in the folder *notebook*
+- **step 2**: Download the image data set from ??
+- **step 3**: Follow the step in the notebook and work interactively.
 
 
 # Useful links:
