@@ -239,9 +239,15 @@ The mammographic images containing either microcalcifications or normal tissue a
 
 ### Confusion Matrix
 
+#### CNN
+
 Confusion matrix obtained CNN model (on the left) and with data augmentation (on the right):
 
 <img src="docs/images/confusion_matrix.png" width="280">    <img src="docs/images/confusion_matrix_aug.png" width="280">
+
+#### Random Forest
+
+<img src="docs/images/confusion_matrix_RF.png" width="280">
 
 ## CNN: ROC Curves
 
