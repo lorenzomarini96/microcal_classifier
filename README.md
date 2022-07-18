@@ -278,6 +278,26 @@ Confusion matrix obtained CNN model (on the left) and with data augmentation (on
 - **Step 5**) To performe ML analysis: open the notebook  , follow the step in the notebook and work interactively.`
 
 
+## Requirements
+
+```
+numpy==1.22.4
+matplotlib==3.3.0
+keras==2.9.0
+Keras-Preprocessing==1.1.2
+Pillow==9.1.1
+PyWavelets==1.3.0
+scikit-image==0.19.3
+scikit-learn==1.1.1
+scipy==1.8.1
+tensorboard==2.9.1
+tensorboard-data-server==0.6.1
+tensorboard-plugin-wit==1.8.1
+tensorflow==2.9.1
+tensorflow-estimator==2.9.0
+tensorflow-io-gcs-filesystem==0.26.0
+```
+
 # Useful links:
 - Convolutional neural network:
     - https://www.tensorflow.org/tutorials/images/cnn
