@@ -61,7 +61,7 @@ class TestMicroClassifier(unittest.TestCase):
         self.assertEqual(len(y0_test), 84, error_message_len)
         self.assertEqual(len(y1_test), 77, error_message_len)
 
-
+    '''
     def test_read_imgs(self):
         """Unit test for read img function (no multiprocessing)."""
         error_message_shape = "Wrong shape"
@@ -138,7 +138,7 @@ class TestMicroClassifier(unittest.TestCase):
         coefficients = np.array(coefficients)
 
         self.assertEqual(coefficients.shape, (797, 2430), "Wrong shape in wavelet coefficient.")
-
+    '''
 
 if __name__ == "__main__":
     unittest.main()
