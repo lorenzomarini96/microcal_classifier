@@ -10,17 +10,6 @@ The repository is structured as follow:
 ```
 microcal_classifier/
 ├── docs
-│   ├── cnnhelper.rst
-│   ├── cnn_model.rst
-│   ├── cnn_model_v2.rst
-│   ├── conf.py
-│   ├── data_augmentation.rst
-│   ├── index.rst
-│   ├── make.bat
-│   ├── Makefile
-│   ├── requirements.txt
-│   ├── wavelet_coeff.rst
-│   └── wavelethelper.rst
 ├── LICENSE
 ├── microcal_classifier
 │   ├── cnnhelper.py
@@ -28,6 +17,7 @@ microcal_classifier/
 │   ├── cross_validation.py
 │   ├── data_augmentation.py
 │   ├── __init__.py
+│   ├── main_wavelet_classifier.py
 │   ├── micro_classifier.py
 │   ├── wavelet_coeff.py
 │   └── wavelethelper.py
@@ -35,9 +25,6 @@ microcal_classifier/
 ├── requirements.txt
 ├── setup.py
 └── tests
-    ├── __init__.py
-    ├── Makefile
-    └── test_microcal.py
 ```
 
 # Motivations
@@ -145,8 +132,6 @@ The following picture shows the effect of random transformation on an image cont
 
 <img src="docs/images/data_aug_image.png" width="500">
 
-The previous figur
-
 # Binary classification based on wavelet coefficients of the images
 
 The microcal_classifier project allows to extract the wavelet coefficient from the images of the data set and 
@@ -172,7 +157,6 @@ The most common methods used in ML to binary classification took into account in
 - Nearest Neighbor
 - Decision Trees
 - Logistic Regression
-- Neural Networks
 - Random Forest
 - Multi-layer Perceptron
 
@@ -305,6 +289,7 @@ tensorflow-io-gcs-filesystem==0.26.0
 ```
 
 # Useful links:
+
 - Convolutional neural network:
     - https://www.tensorflow.org/tutorials/images/cnn
     - ImageDataGenerator:
