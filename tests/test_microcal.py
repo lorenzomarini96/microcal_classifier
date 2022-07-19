@@ -37,9 +37,9 @@ class TestMicroClassifier(unittest.TestCase):
         #self.TRAIN_PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/Train'
         #self.TEST_PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/Test'
 
-        self.PATH = '/dataset/IMAGES/Mammography_micro/'
-        self.TRAIN_PATH = '/dataset/IMAGES/Mammography_micro/Train'
-        self.TEST_PATH = '/dataset/IMAGES/Mammography_micro/Test'
+        self.PATH = '../dataset/IMAGES/Mammography_micro/'
+        self.TRAIN_PATH = '../dataset/IMAGES/Mammography_micro/Train'
+        self.TEST_PATH = '../dataset/IMAGES/Mammography_micro/Test'
 
     def test_read_img_mp(self):
         """Unit test for read img function with multiprocessing."""
