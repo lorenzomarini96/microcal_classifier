@@ -258,14 +258,34 @@ Confusion matrix obtained CNN model (on the left) and with data augmentation (on
 ```git clone https://github.com/lorenzomarini96/microcal_classifier.git```
 - **step 2**) Download the image data set from [Google Drive](https://drive.google.com/drive/folders/1wqp1YIcqSaoChZd7k7ikwylRFGIarKa6?usp=sharing).
 - **step 3**) Change directory: ```cd path/to/microcal_classifier/microcal_classifier```
-- **Step 4**) To performe CNN analysis: ```main_cnn.py /path/to/dataset/folder/```
-- **Step 5**) To performe ML analysis: ```main_wavelet_classifier.py /path/to/dataset/folder/```
+- **Step 4**) To perform CNN analysis: ```main_cnn.py /path/to/dataset/folder/```
 
+
+- **Step 5**) To perform ML analysis:
+```
+$ main_wavelet_classifier.py -h 
+usage: main_wavelet_classifier.py [-h] [-dp] [-f] [-l] [-k] [-mlc] [-lt]
+
+ML classifiers analysis in digital mammography.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -dp , --datapath      path of the data folder.
+  -f , --family         Family wavelet for the feature extraction.
+  -l , --level          level of decomposition using Daubechies 5 mother wavelet.
+  -k , --kcrossvalidation 
+                        Number of folder to use for the cross validation and the plot of ROC curve.
+  -mlc , --classifier   Type of machine learning classifier for the k-cross validation.
+  -lt , --latex         Print the table with the performance results written in LaTeX format.
+```
+```
+$ python3 main_wavelet_classifier.py -dp /home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/  -f db5 -l 4 -k 5 -mlc 'Random Forest' -lt True 
+```
 ## Method 2 (demo)
 - **step 1**) Open the jupyter notebook in the folder *notebook*
 - **step 2**) Download the image data set from [Google Drive](https://drive.google.com/drive/folders/1wqp1YIcqSaoChZd7k7ikwylRFGIarKa6?usp=sharing).
-- **Step 4**) To performe CNN analysis: open the notebook , follow the step in the notebook and work interactively.
-- **Step 5**) To performe ML analysis: open the notebook  , follow the step in the notebook and work interactively.`
+- **Step 4**) To perform CNN analysis: open the notebook , follow the step in the notebook and work interactively.
+- **Step 5**) To perfor ML analysis: open the notebook  , follow the step in the notebook and work interactively.`
 
 
 ## Requirements
