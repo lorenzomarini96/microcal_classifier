@@ -42,6 +42,10 @@ class TestMicroClassifier(unittest.TestCase):
         self.TRAIN_PATH = '../dataset/IMAGES/Mammography_micro/Train'
         self.TEST_PATH = '../dataset/IMAGES/Mammography_micro/Test'
 
+    def test_idiot(self):
+        self.assertEqual(0, 0, "zero = zero")
+    
+    '''
     def test_read_img_mp(self):
         """Unit test for read img function with multiprocessing."""
 
@@ -61,7 +65,7 @@ class TestMicroClassifier(unittest.TestCase):
         self.assertEqual(len(y0_test), 84, error_message_len)
         self.assertEqual(len(y1_test), 77, error_message_len)
 
-    '''
+    
     def test_read_imgs(self):
         """Unit test for read img function (no multiprocessing)."""
         error_message_shape = "Wrong shape"
