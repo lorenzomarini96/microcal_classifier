@@ -12,12 +12,6 @@ import pandas as pd
 import sklearn
 from sklearn.model_selection import train_test_split
 
-'''
-import tensorflow
-tensorflow.random.set_seed(1)
-from keras.models import Sequential
-from keras.callbacks import ModelCheckpoint
-'''
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -194,7 +188,6 @@ def plot_random_images(X, y, n_x=3, n_y=3):
     plt.show()
 
 
-# TODO: LOGGING E LE ECCEZIONI NON FUNZIONANO BENE...
 def read_imgs(dataset_path, classes):
     """Function reading all the images in a given folder which already contains
     two subfolder.
