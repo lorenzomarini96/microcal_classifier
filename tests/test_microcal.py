@@ -10,10 +10,13 @@ import unittest
 
 import numpy as np
 
-# Setting path
-sys.path.insert(0, str(Path(os.getcwd()).parent)) # Get the absolute path to the parent dir.
-PACKAGE_NAME = "../microcal_classifier/"
-sys.path.insert(0, PACKAGE_NAME)
+# Locally: setting path
+#sys.path.insert(0, str(Path(os.getcwd()).parent)) # Get the absolute path to the parent dir.
+#PACKAGE_NAME = "../microcal_classifier/"
+#sys.path.insert(0, PACKAGE_NAME)
+
+package_name = "microcal_classifier"
+sys.path.insert(0, package_name)
 
 from microcal_classifier.wavelethelper import read_img
 from microcal_classifier.cnnhelper import read_imgs, count_labels, split_dataset
@@ -29,10 +32,14 @@ class TestMicroClassifier(unittest.TestCase):
         """
         warnings.simplefilter('ignore', ResourceWarning)
 
-        self.PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/'
-        self.TRAIN_PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/Train'
-        self.TEST_PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/Test'
+        # Locally: setting path
+        #self.PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/'
+        #self.TRAIN_PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/Train'
+        #self.TEST_PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/Test'
 
+        self.PATH = '/dataset/IMAGES/Mammography_micro/'
+        self.TRAIN_PATH = '/dataset/IMAGES/Mammography_micro/Train'
+        self.TEST_PATH = '/dataset/IMAGES/Mammography_micro/Test'
 
     def test_read_img_mp(self):
         """Unit test for read img function with multiprocessing."""
