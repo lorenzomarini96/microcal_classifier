@@ -38,25 +38,20 @@ class TestMicroClassifier(unittest.TestCase):
         """Unit test for read img function with multiprocessing."""
 
         error_message_len = "Wrong lenght"
-        #error_message_shape = "Wrong shape"
 
         train_path_0 = os.path.join(self.PATH, 'Train/0')
-        X0_train, y0_train = read_img(train_path_0)
+        _, y0_train = read_img(train_path_0)
         train_path_1 = os.path.join(self.PATH, 'Train/1')
-        X1_train, y1_train = read_img(train_path_1)
+        _, y1_train = read_img(train_path_1)
         test_path_0 = os.path.join(self.PATH, 'Test/0')
-        X0_test, y0_test = read_img(test_path_0)
+        _, y0_test = read_img(test_path_0)
         test_path_1 = os.path.join(self.PATH, 'Test/1')
-        X1_test, y1_test = read_img(test_path_1)
+        _, y1_test = read_img(test_path_1)
 
         self.assertEqual(len(y0_train), 330, error_message_len)
         self.assertEqual(len(y1_train), 306, error_message_len)
         self.assertEqual(len(y0_test), 84, error_message_len)
         self.assertEqual(len(y1_test), 77, error_message_len)
-        #self.assertEqual(X0_train.shape, (330, 60, 60, 1), error_message_len)
-        #self.assertEqual(X1_train.shape, (306, 60, 60, 1), error_message_len)
-        #self.assertEqual(X0_test.shape, (84, 60, 60, 1), error_message_shape)
-        #self.assertEqual(X1_test.shape, (77, 60, 60, 1) , error_message_shape)
 
 
     def test_read_imgs(self):
