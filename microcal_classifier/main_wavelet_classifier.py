@@ -28,20 +28,16 @@ The binary classifiers are evaluate by means the following parameters:
 
 """
 
+import argparse
 import os
 import glob
 import multiprocessing as mp
 from pathlib import Path
 import sys
 
-#from PIL import Image
-#import skimage
-#from skimage import img_as_float
-#from skimage.io import imread
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-#import pywt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn import metrics
@@ -54,8 +50,6 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score
-from sklearn.metrics import roc_auc_score, roc_curve, auc
-from sklearn.model_selection import StratifiedKFold
 
 from wavelet_coeff import dwt_coeff_array
 from wavelethelper import read_img, plot_cv_roc
@@ -65,10 +59,78 @@ sys.path.insert(0, str(Path(os.getcwd()).parent))
 
 if __name__ == '__main__':
 
+    parser = argparse.ArgumentParser(
+        description="ML classifiers analysis in digital mammography."
+    )
+
+    parser.add_argument(
+        "-dp",
+        "--datapath",
+        metavar="",
+        help="path of the data folder.",
+        default="/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/"
+    )
+
+    parser.add_argument(
+        "-f",
+        "--family",
+        metavar="",
+        type=str,
+        help="Family wavelet for the feature extraction.",
+        default="db5",
+    )
+
+    parser.add_argument(
+        "-l",
+        "--level",
+        metavar="",
+        type=int,
+        help="level of decomposition using Daubechies 5 mother wavelet.",
+        default="4",
+    )
+
+    parser.add_argument(
+        "-k",
+        "--kcrossvalidation",
+        metavar="",
+        type=int,
+        help="Number of folder to use for the cross validation and the plot of ROC curve.",
+        default="5",
+    )
+
+    parser.add_argument(
+        "-mlc",
+        "--classifier",
+        metavar="",
+        type=str,
+        choices=['Logistic Regression',
+            'Support Vector Machines',
+            'Decision Trees',
+            'Random Forest',
+            'Naive Bayes',
+            'K-Nearest Neighbor',
+            'MLPClassifier'
+        ],
+        help="Type of machine learning classifier for the k-cross validation.",
+        default="Random Forest",
+    )
+
+    parser.add_argument(
+        "-lt",
+        "--latex",
+        metavar="",
+        type=bool,
+        help="Print the table with the performance results written in LaTeX format.",
+        default=False,
+    )
+
+    args = parser.parse_args()
+
     #==================================================
     # STEP 1: LOAD IMAGE DATA SET
     #==================================================
-    PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/' # Image path
+
+    PATH = args.datapath
 
     TRAIN_PATH_0 = os.path.join(PATH, 'Train/0')
     X0_train, y0_train = read_img(TRAIN_PATH_0)
@@ -98,14 +160,14 @@ if __name__ == '__main__':
     # STEP 2: COMPUTE THE WAVELET COEFFICIENTS
     #==================================================
     WAVELET = 'db5'
-    LEVEL = 4
+    LEVEL = args.level
     PARTIAL = True
 
     # Defines a list to put all coefficients in
     coefficients = []
 
     # Appends to the previous list the coefficients obtained from wavelet decomposition
-    for i, image in enumerate(X_tot):
+    for i, _ in enumerate(X_tot):
         array = dwt_coeff_array(X_tot[i],
                                 wavelet=WAVELET,
                                 level=LEVEL,
@@ -115,7 +177,6 @@ if __name__ == '__main__':
 
     # Converts the list to a numpy array
     coefficients = np.array(coefficients)
-    print(coefficients.shape)
 
     #==================================================
     # STEP 3: BINARY CLASSIFICATION
@@ -178,7 +239,6 @@ if __name__ == '__main__':
     accuracy, precision, recall = {}, {}, {}
 
     for key in models.keys():
-
         # Fit the classifier
         models[key].fit(X_train, y_train)
 
@@ -191,7 +251,6 @@ if __name__ == '__main__':
         recall[key] = recall_score(predictions, y_test)
         #roc_auc[key] = roc_auc_score(predictions, y_test)
 
-
     # Use pandas to view all the stored metrics as a table
     df_model = pd.DataFrame(index=models.keys(), columns=['Accuracy',
                                                           'Precision',
@@ -203,11 +262,12 @@ if __name__ == '__main__':
     df_model['Recall'] = recall.values()
     #df_model['AUC'] = roc_auc.values()
 
-    print(df_model)
+    #print(df_model)
 
     # LaTeX
-    df = pd.DataFrame(dict(df_model))
-    print(df.to_latex(index=False))
+    if args.latex:
+        df = pd.DataFrame(dict(df_model))
+        print(df.to_latex(index=False))
 
     # Plot a bar chart to compare the classifiers' performance:
     ax = df_model.plot.barh(figsize=(8, 5))
@@ -226,8 +286,30 @@ if __name__ == '__main__':
     # STEP 4: K-FOLD CROSS VALIDATION
     #==================================================
 
-    classifier = RandomForestClassifier(n_estimators=100)
-    plot_cv_roc(X, y, classifier, 5)
+    if args.classifier == 'Logistic Regression':
+        classifier = LinearSVC()
+
+    elif args.classifier == 'Support Vector Machines':
+        classifier = LogisticRegression()
+
+    elif args.classifier == 'Decision Trees':
+        classifier = DecisionTreeClassifier()
+
+    elif args.classifier == 'Random Forest':
+        classifier = RandomForestClassifier()
+
+    elif args.classifier == 'Naive Bayes':
+        classifier = GaussianNB()
+
+    elif args.classifier == 'K-Nearest Neighbor':
+        classifier = KNeighborsClassifier()
+
+    elif args.classifier == 'MLPClassifier':
+        classifier = MLPClassifier()
+
+    k = args.kcrossvalidation
+
+    plot_cv_roc(X, y, classifier, k)
 
     #for key in models.keys():
-    #    plot_cv_roc(X, y, models[key], 5)
+    #    plot_cv_roc(X, y, models[key], k)
