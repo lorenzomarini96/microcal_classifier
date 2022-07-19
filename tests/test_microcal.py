@@ -15,7 +15,8 @@ import numpy as np
 #PACKAGE_NAME = "../microcal_classifier/"
 #sys.path.insert(0, PACKAGE_NAME)
 
-package_name = "microcal_classifier"
+sys.path.insert(0, str(Path(os.getcwd()).parent)) # Get the absolute path to the parent dir.
+package_name = "../microcal_classifier/"
 sys.path.insert(0, package_name)
 
 from microcal_classifier.wavelethelper import read_img
