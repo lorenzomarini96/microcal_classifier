@@ -17,8 +17,8 @@ microcal_classifier/
 │   ├── cross_validation.py
 │   ├── data_augmentation.py
 │   ├── __init__.py
+│   ├── main_cnn.py
 │   ├── main_wavelet_classifier.py
-│   ├── micro_classifier.py
 │   ├── wavelet_coeff.py
 │   └── wavelethelper.py
 ├── README.md
@@ -43,12 +43,11 @@ The provided dataset contains 797 images of 60 $\times$ 60 pixels representing p
 | Train     |      330      |    306                     |
 | Test      |       84      |     77                     |
 
-All dataset details are provided in the reference paper (add references).
 
 The datasets are partitionated according the following hierarchy:
 
 ```
-DATASETS
+dataset
 └── IMAGES
     └── Mammography_micro
         ├── Test
