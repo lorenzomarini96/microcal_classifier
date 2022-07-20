@@ -18,13 +18,6 @@ package_name = "../microcal_classifier/"
 sys.path.insert(0, package_name)
 
 
-
-THIS_DIR = Path(__file__).parent
-
-my_data_path_train = THIS_DIR.parent / '../dataset/IMAGES/Mammography_micro/Train/'
-
-my_data_path_test = THIS_DIR.parent / '../dataset/IMAGES/Mammography_micro/Test/'
-
 from microcal_classifier.wavelethelper import read_img
 from microcal_classifier.cnnhelper import read_imgs, count_labels, split_dataset
 from microcal_classifier.wavelet_coeff import dwt_coeff_array
@@ -33,22 +26,27 @@ from microcal_classifier.wavelet_coeff import dwt_coeff_array
 class TestMicroClassifier(unittest.TestCase):
     """Unit test for the microcal_classifier project."""
 
+    
     def setUp(self):
         """
         Initialize the class.
         """
         warnings.simplefilter('ignore', ResourceWarning)
 
-        # Locally: setting path
-        #self.PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/'
-        #self.TRAIN_PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/Train'
-        #self.TEST_PATH = '/home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/Test'
+        self.y_test = np.array([1,1,1,0,0,0])
+        self.y_train = np.array([0,0,1,0,0,0])
 
-        self.PATH = '../dataset/IMAGES/Mammography_micro/'
-        self.TRAIN_PATH = '../dataset/IMAGES/Mammography_micro/Train'
-        self.TEST_PATH = '../dataset/IMAGES/Mammography_micro/Test'
+    def test_count_labels(self):
+        """Unittest for count the number of labels in the data set."""
 
 
+        data = count_labels(self.y_train, self.y_test, verbose=False)
+
+        self.assertIn('Train', data.keys(), 'Train not in dataframe')
+        self.assertIn('Test', data.keys(), 'Test not in dataframe')
+        self.assertEqual(data.shape, (2, 3), 'Shape not correct')
+
+    '''
     def test_read_img_mp(self):
         """Unit test for read img function with multiprocessing."""
 
@@ -145,6 +143,7 @@ class TestMicroClassifier(unittest.TestCase):
         coefficients = np.array(coefficients)
 
         self.assertEqual(coefficients.shape, (797, 2430), "Wrong shape in wavelet coefficient.")
+        '''
 
 
 if __name__ == "__main__":
