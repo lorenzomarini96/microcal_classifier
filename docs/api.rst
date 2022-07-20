@@ -16,6 +16,13 @@ cnnhelper
    :members:
 
 
+cross_validation
+-----------------
+
+.. automodule:: cross_validation
+   :members:
+
+
 data_augmentation
 -----------------
 
@@ -34,11 +41,4 @@ wavelethelper
 -------------
 
 .. automodule:: wavelethelper
-   :members:
-
-
-cross_validation
------------------
-
-.. automodule:: cross_validation
    :members:
