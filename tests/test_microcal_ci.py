@@ -9,25 +9,20 @@ import warnings
 import unittest
 
 import numpy as np
-import pywt
-
-# Locally: setting path
-#sys.path.insert(0, str(Path(os.getcwd()).parent)) # Get the absolute path to the parent dir.
 
 sys.path.insert(0, str(Path(os.getcwd()).parent)) # Get the absolute path to the parent dir.
 package_name = "../microcal_classifier/"
 sys.path.insert(0, package_name)
 
 
-from microcal_classifier.wavelethelper import read_img
-from microcal_classifier.cnnhelper import read_imgs, count_labels, split_dataset
+from microcal_classifier.cnnhelper import count_labels, split_dataset
 from microcal_classifier.wavelet_coeff import dwt_coeff_array
 
 
 class TestMicroClassifier(unittest.TestCase):
     """Unit test for the microcal_classifier project."""
 
-    
+
     def setUp(self):
         """
         Initialize the class.
