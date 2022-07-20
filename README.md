@@ -281,7 +281,7 @@ optional arguments:
 $ python3 main_cnn.py -dp /home/lorenzomarini/Desktop/microcal_classifier/dataset/IMAGES/Mammography_micro/ -de True -e 25 -ad True -cv True -k 5
 ```
 
-- **Step 5**) To perform ML analysis:
+- **Step 4**) To perform ML analysis:
 ```
 $ main_wavelet_classifier.py -h
 
