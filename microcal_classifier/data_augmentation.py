@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import PIL
 from tensorflow import keras
-from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
+from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.utils import img_to_array
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -121,6 +122,8 @@ def data_aug(train_dataset_path, img_width=60, img_height=60, batch_size=32):
         class_mode='binary',
         subset='validation'
         )
+
+    return train_gen, val_gen 
 
 
 def single_image_aug(image_path, show=True):

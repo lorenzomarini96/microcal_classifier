@@ -83,18 +83,27 @@ if __name__ == '__main__':
         "-ad",
         "--augdata",
         metavar="",
-        type=int,
+        type=bool,
         help="Perform data augmentation procedure.",
-        default="25",
+        default="True",
+    )
+
+    parser.add_argument(
+        "-cv",
+        "--crossvalidation",
+        metavar="",
+        type=bool,
+        help="Perform the cross validation and the plot of ROC curve.",
+        default="True",
     )
 
     parser.add_argument(
         "-k",
-        "--kcrossvalidation",
+        "--kfolds",
         metavar="",
         type=int,
-        help="Number of folder to use for the cross validation and the plot of ROC curve.",
-        default="5",
+        help="Number of folds for the cross validation and the plot of ROC curve.",
+        default=5,
     )
 
     args = parser.parse_args()
@@ -143,7 +152,7 @@ if __name__ == '__main__':
                     shuffle=True,
                     validation_freq=1,
                     )
-    
+
     # Training history
     print(history.history.keys())
     plt.plot(history.history["loss"])
@@ -162,7 +171,6 @@ if __name__ == '__main__':
     plt.xlabel('Epochs')
     plt.legend(['train', 'validation'], loc='lower right')
     plt.show()
-
 
     # Prediction
     y_val_pred = model.predict(x_val)
@@ -187,24 +195,117 @@ if __name__ == '__main__':
     # Classification report
     print(classification_report(y_test, y_test_pred.round()))
 
-    #if args.augdata:
-        #============================
-        # Data augmentation procedure
-        #============================
+    #============================
+    # Data augmentation procedure
+    #============================
+    
+    if args.augdata:
+        for data_path in [TRAIN_PATH, TEST_PATH]:
+            for path, folders, fnames in os.walk(data_path):
+                for fname in fnames:
+                    abs_path = os.path.join(path, fname)
+                    dest_folder = path.replace('Train', 'Train_png').replace('Test', 'Test_png')
+                    convert_to_png(abs_path, dest_folder)
 
-    '''
-    #if args.kcrossvalidation:
-        #=============================
-        # K-Cross validation procedure
-        #=============================
+        BATCH_SIZE = 32
+        IMG_WITDH, IMG_HEIGHT = (60, 60)
+        TRAIN_PATH_png = os.path.join(PATH, 'Train_png')
+        train_gen, val_gen = data_aug(train_dataset_path=TRAIN_PATH_png,
+                                    img_width=IMG_WITDH,
+                                    img_height=IMG_HEIGHT,
+                                    batch_size=BATCH_SIZE
+                                    )
+
+        # Fit model on augmented dataset
+
+        aug_model = cnn_classifier()
+        aug_model.compile(loss='binary_crossentropy',
+                          optimizer='adam',
+                          metrics=['accuracy']
+                          )
+
+        history = aug_model.fit(train_gen,
+                            batch_size=32,
+                            validation_data=val_gen,
+                            epochs=args.epochs,
+                            shuffle=True,
+                            validation_freq=1,
+                            )
+        # History del training
+        print(history.history.keys())
+        plt.plot(history.history["loss"])
+        plt.plot(history.history["val_loss"])
+        plt.title('Data Augmented Model loss')
+        plt.ylabel('Loss')
+        plt.xlabel('Epochs')
+        plt.legend(['train', 'validation'], loc='lower right')
+        plt.show()
+
+        # History for accuracy
+        plt.plot(history.history['accuracy'])
+        plt.plot(history.history['val_accuracy'])
+        plt.title('Data Augmented Model accuracy')
+        plt.ylabel('Accuracy')
+        plt.xlabel('Epochs')
+        plt.legend(['train', 'validation'], loc='lower right')
+        plt.show()
+
+        # Evaluate and compare the performances of the two models on test dataset
         
+        # 1)
+        # Trai set
+        model.evaluate(x_train, y_train)
+
+        # Validation set
+        model.evaluate(x_test, y_test)
+
+        # Test set
+        model.evaluate(x_val, y_val)
+
+        # Classification report
+        y_test_pred = model.predict(x_test)
+        print(classification_report(y_test, y_test_pred.round()))
+
+        # 2)
+        # Trai set
+        aug_model.evaluate(x_train, y_train)
+
+        # Validation set
+        aug_model.evaluate(x_test, y_test)
+
+        # Test set
+        aug_model.evaluate(x_val, y_val)
+
+        # Classification report
+        y_test_pred = aug_model.predict(x_test)
+        print(classification_report(y_test, y_test_pred.round()))
+    
+        # Confusion Matrix
+        cm = confusion_matrix(y_test, model.predict(x_test).round())
+        cm_plot_label =['Normal tissue', 'Micro  cluster']
+        plot_confusion_matrix(cm, cm_plot_label, title ='Confusion Matrix')
+        
+        cm = confusion_matrix(y_test, aug_model.predict(x_test).round())
+        cm_plot_label =['Normal tissue', 'Micro  cluster']
+        plot_confusion_matrix(cm, cm_plot_label, title ='Confusion Matrix aAug data')
+
+        # ROC curve
+        plot_roc_curve(y_test, model.predict(x_test))
+        plot_roc_curve(y_test, aug_model.predict(x_test))
+    
+    #=============================
+    # K-Cross validation procedure
+    #=============================
+    if args.crossvalidation:
+        print(f'\nK-Cross validation procedure (K = {args.kfolds})')
         INPUT_SHAPE = (60, 60, 1)
-        plot_cv_roc(X=x_train_raw,
-                    y=y_train_raw,
+        plot_cv_roc(X=x_train,
+                    y=y_train,
                     X_test=x_test,
                     y_test=y_test,
-                    model=cnn_model(shape=INPUT_SHAPE, verbose=False),
-                    n_splits=5
+                    model=cnn_classifier(shape=INPUT_SHAPE, verbose=False),
+                    n_splits=args.kfolds,
+                    epochs=args.epochs
         )
 
-    '''
+    

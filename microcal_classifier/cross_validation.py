@@ -37,7 +37,7 @@ from numpy import interp
 from sklearn.model_selection import KFold
 
 
-def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5):
+def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5, epochs=25):
     """
     Implement the K-cross validation procedure using StratifiedKFold
     with a model supplied by the user.
@@ -48,14 +48,20 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5):
 
     Parameters
     ----------
-    X : str
-        Path to the input train data set.
-    y : bool
-        If True, shows the tranformed imags.
-    model : bool
-        If True, shows the tranformed imags.
+    X : numpy array
+        Array of train images.
+    y : numpy array
+        Array of train labels.
+    X_test : numpy array
+        Array of test images.
+    y_test : numpy array
+        Array of test labels.
+    model : keras model
+        Model to train for cross validation.
     n_splits : int
         Number of folders.
+    epochs : int
+        Number of epochs for train.
 
     Returns
     -------
@@ -89,7 +95,7 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5):
     # Saving the weights before training as reset before each training
     model.save_weights('reset_model.h5')
 
-    plt.figure(1)
+    fig1 = plt.figure(1)
 
     i = 0
     for train, val in cv.split(X, y):
@@ -98,17 +104,15 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5):
         prediction = model.fit(X[train],
                                y[train],
                                batch_size=32,
-                               epochs=25,
+                               epochs=epochs,
                                verbose=0
                                )
     
         # Evaluates the efficiency of the model
         scores_train = model.evaluate(X[train], y[train], verbose=0)
         scores_val = model.evaluate(X[val], y[val], verbose=0)
-        scores_test = model.evaluate(x_test, y_test, verbose=0)
+        scores_test = model.evaluate(X_test, y_test, verbose=0)
 
-        # Printing the results of the training
-        #print(f'Folder {i}: {model.metrics_names[0]:.2f} of {scores_val[0]:.2f} - {model.metrics_names[1]:.2f} of {scores_val[1]:.2f}')
         print(f'Folder {i}')
 
         y_val_pred = model.predict(X[val])
@@ -119,8 +123,8 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5):
         # Compute ROC curve and area under the curve    
         roc_auc = auc(fpr, tpr)
         aucs.append(roc_auc)
-        plt.plot(fpr, tpr, lw=1,
-                #alpha=0.3,
+        plt.plot(fpr, tpr,
+                lw=1,
                 label=f'ROC fold {i} (AUC = {roc_auc:.2f})'
         )
         # Train
@@ -142,13 +146,12 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5):
     plt.ylabel('True Positive Rate (TPR)', fontsize=18)
     plt.show()
 
-    plt.figure(2)
+    fig2 = plt.figure(2)
     plt.plot([0, 1], [0, 1],
             linestyle='--',
             lw=2,
             color='r',
             label='Chance',
-            #alpha=.8
     )
 
     mean_tpr = np.mean(tprs, axis=0)
@@ -159,7 +162,6 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5):
             color='b',
             label=f'Mean ROC (AUC = {mean_auc:.2f} $\pm$ {std_auc:.2f})',
             lw=2,
-            #alpha=.8
             )
 
     std_tpr = np.std(tprs, axis=0)
@@ -195,3 +197,5 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5):
     # Calculare loss error as maximum value error
     err_test_loss = (max(test_loss)-min(test_loss))/2
     print(f'Test loss: {np.mean(test_loss):.2f} +/- {err_test_loss:.2f}')
+
+    return fig1, fig2

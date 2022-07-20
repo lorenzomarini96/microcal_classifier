@@ -7,8 +7,7 @@ Welcome to microcal_classifier's documentation!
 ===============================================
 
 The microcal_classifier is a python package for analyzing digital mammograms images.
-It allows to apply a convolutional neural network on a set of images - click here to download the images - for the classification of mammograms. 
-In particular, it is able to identify or not the presence of microcalcifications.
+It allows to apply a convolutional neural network on a set of images for the classification of mammograms. 
 The performance of the classifier is quantified in terms of area under the ROC cure and accuracy.
 It is also possible to implement a cross validation on the data, as well as a data augmentation procedure.
 

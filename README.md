@@ -25,6 +25,7 @@ microcal_classifier/
 ├── requirements.txt
 ├── setup.py
 └── tests
+    └── test_microcal.py
 ```
 
 # Motivations
@@ -35,7 +36,7 @@ Cluster of microcalcifications can be an early sign of breast cancer. In this py
 
 ## Train, test, validation sets
 
-The provided dataset contains 797 images of 60$\times$60 pixels representing portions of mammogram either containing microcalcification clusters (label=1) or  normal breast tissue (label=0). The available images are already partitioned in a train and a test samples, containing, respectively:
+The provided dataset contains 797 images of 60 $\times$ 60 pixels representing portions of mammogram either containing microcalcification clusters (label=1) or  normal breast tissue (label=0). The available images are already partitioned in a train and a test samples, containing, respectively:
 
 | Sets      | Normal tissue | Microcalcification clusters|
 | --------- | ------------- | -------------------------- |
@@ -57,8 +58,6 @@ DATASETS
             ├── 0
             └── 1
 ```
-
-The DATASETS folder can be downloaded ???
 
 The figure shows both images containing microcalcifications and healthy tissue, randomly choosen from the data set:
 
@@ -212,7 +211,7 @@ The mammographic images containing either microcalcifications or normal tissue a
 |                      |               |               |              |              |               |               |
 | CNN                  |  0.17         |  0.93         |  0.23        | 0.91         |  0.21         | 0.92          |
 |                      |               |               |              |              |               |               |
-| CNN data agu         | 0.24          | 0.91          | 0.30         | 0.89         | 0.241         | 0.93          |
+| CNN data agu         | 0.24          | 0.91          | 0.30         | 0.89         | 0.24          | 0.93          |
 |                      |               |               |              |              |               |               |
 | CNN cross validation | 0.27 +/- 0.14 |0.90 +/- 0.05  |0.31 +/- 0.14 |0.87 +/- 0.05 | 0.27 +/- 0.15 | 0.89 +/- 0.07 |
 
@@ -252,14 +251,22 @@ Confusion matrix obtained CNN model (on the left) and with data augmentation (on
 
 # How to use
 
-## Method 1 (locally)
+## Method 1 (local)
 
 - **step 1**) Download the repository from github
 ```git clone https://github.com/lorenzomarini96/microcal_classifier.git```
-- **step 2**) Download the image data set from [Google Drive](https://drive.google.com/drive/folders/1wqp1YIcqSaoChZd7k7ikwylRFGIarKa6?usp=sharing).
-- **step 3**) Change directory: ```cd path/to/microcal_classifier/microcal_classifier```
-- **Step 4**) To perform CNN analysis: ```main_cnn.py /path/to/dataset/folder/```
+- **step 2**) Change directory: ```cd path/to/microcal_classifier/microcal_classifier```
+- **Step 3**) To perform CNN analysis: ```main_cnn.py /path/to/dataset/folder/```
 
+```
+$ main_cnn.py -h 
+usage: main_cnn.py 
+
+```
+
+```
+$ python3 main_wavelet_classifier.py -dp /home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/  -f db5 -l 4 -k 5 -mlc 'Random Forest' -lt True 
+```
 
 - **Step 5**) To perform ML analysis:
 ```
@@ -278,14 +285,15 @@ optional arguments:
   -mlc , --classifier   Type of machine learning classifier for the k-cross validation.
   -lt , --latex         Print the table with the performance results written in LaTeX format.
 ```
+
 ```
 $ python3 main_wavelet_classifier.py -dp /home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/  -f db5 -l 4 -k 5 -mlc 'Random Forest' -lt True 
 ```
 ## Method 2 (demo)
 - **step 1**) Open the jupyter notebook in the folder *notebook*
 - **step 2**) Download the image data set from [Google Drive](https://drive.google.com/drive/folders/1wqp1YIcqSaoChZd7k7ikwylRFGIarKa6?usp=sharing).
-- **Step 4**) To perform CNN analysis: open the notebook , follow the step in the notebook and work interactively.
-- **Step 5**) To perfor ML analysis: open the notebook  , follow the step in the notebook and work interactively.`
+- **Step 4**) To perform CNN analysis: open the notebook CNN_DEMO.ipynb, follow the step in the notebook and work interactively.
+- **Step 5**) To perfor ML analysis: open the notebook  ML_WAVELET_DEMO.ipynb, follow the step in the notebook and work interactively.`
 
 
 ## Requirements
