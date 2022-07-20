@@ -255,7 +255,7 @@ Confusion matrix obtained CNN model (on the left) and with data augmentation (on
 - **step 1**) Download the repository from github
 ```git clone https://github.com/lorenzomarini96/microcal_classifier.git```
 - **step 2**) Change directory: ```cd path/to/microcal_classifier/microcal_classifier```
-- **Step 3**) To perform CNN analysis: ```main_cnn.py /path/to/dataset/folder/```
+- **Step 3**) To perform CNN analysis:
 
 ```
 $ main_cnn.py -h 
