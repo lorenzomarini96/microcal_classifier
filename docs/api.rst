@@ -35,3 +35,10 @@ wavelethelper
 
 .. automodule:: wavelethelper
    :members:
+
+
+cross_validation
+-----------------
+
+.. automodule:: cross_validation
+   :members:
