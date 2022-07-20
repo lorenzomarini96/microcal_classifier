@@ -1,4 +1,8 @@
 """Helper functions for microcal_classifier project."""
+# pylint: disable=C0103
+# pylint: disable=W0611
+# pylint: disable=R0914
+# pylint: disable=R0913
 
 import os
 import glob
@@ -34,7 +38,7 @@ def bar_plot(y_train, y_test):
     ----------
     y_train : numpy_array
         Labels for the train data set.
-    y_test : numpy_array 
+    y_test : numpy_array
         Labels for the train data set.
 
     Returns
@@ -67,7 +71,7 @@ def barplot_split_set(y_train, y_test, val_perc=0.30):
     ----------
     y_train : numpy_array
         Labels for the train data set.
-    y_test : numpy_array 
+    y_test : numpy_array
         Labels for the train data set.
     val_perc : float, optional
         Percentual of items to use in validation.
@@ -109,7 +113,7 @@ def count_labels(y_train, y_test, verbose=True):
     ----------
     y_train : numpy_array
         Labels for the train data set.
-    y_test : numpy_array 
+    y_test : numpy_array
         Labels for the test data set.
     verbose : bool, optional
         Print the number of items in the set. Defaults to True.
@@ -118,7 +122,7 @@ def count_labels(y_train, y_test, verbose=True):
     -------
     data : pandas dataframe.
         Dataframe containing the total number of items for a specific label and set.
-    
+
     Examples
     --------
     >>> import numpy as np
@@ -254,7 +258,7 @@ def split_dataset(X_train, y_train, X_test, y_test, perc=0.2, verbose=True):
             Split label data set for training.
         y_val : numpy_array
             Label data set for validation.
-    
+
     Examples
     --------
     >>> X_train, x_val, y_train, y_val = train_test_split(X_train, y_train,
@@ -360,7 +364,7 @@ def plot_roc_curve(y_test, y_test_pred):
     """
 
     roc_log = roc_auc_score(y_test, y_test_pred)
-    false_positive_rate, true_positive_rate, threshold = roc_curve(y_test, y_test_pred) 
+    false_positive_rate, true_positive_rate, threshold = roc_curve(y_test, y_test_pred)
     area_under_curve = auc(false_positive_rate, true_positive_rate)
 
     fig = plt.figure(figsize=(10,10))
@@ -398,7 +402,7 @@ def plot_correct_pred(y, y_pred, x):
     prop_class=[]
 
     for i in range(len(y)):
-        if(y[i]==y_pred.round()[i]):
+        if y[i] == y_pred.round()[i]:
             prop_class.append(i)
 
     random_idx_list = np.random.permutation(prop_class)
@@ -411,14 +415,17 @@ def plot_correct_pred(y, y_pred, x):
         plt.yticks([])
         plt.grid(False)
         plt.imshow(np.squeeze(x[random_idx_list[i]]), cmap='gray')
-        plt.title(f"Actual result: {y[random_idx_list[i]]};\nPredicted result: {int(y_pred.round()[random_idx_list[i]])}", fontsize=14, color='black')
-        plt.subplots_adjust(left=0.05,
-                            bottom=0.001, 
-                            right=0.9, 
-                            top=0.4, 
-                            wspace=0.1, 
-                            hspace=0.1
-                            )
+        plt.title(f"Actual result: {y[random_idx_list[i]]};\nPredicted result: {int(y_pred.round()[random_idx_list[i]])}",
+        fontsize=14,
+        color='black'
+        )
+        plt.subplots_adjust(top=0.92,
+        bottom=0.08,
+        left=0.10,
+        right=0.95,
+        hspace=0.25,
+        wspace=0.35
+        )
     plt.show()
 
 
@@ -443,11 +450,11 @@ def plot_mis_pred(y, y_pred, x):
     mis_class=[]
 
     for i in range(len(y)):
-        if(y[i]!=y_pred.round()[i]):
+        if y[i] != y_pred.round()[i]:
             mis_class.append(i)
 
     random_idx_list = np.random.permutation(mis_class)
-  
+
     plt.figure(figsize=(15,15))
 
     if (len(mis_class) >= 10):
@@ -457,7 +464,10 @@ def plot_mis_pred(y, y_pred, x):
             plt.yticks([])
             plt.grid(False)
             plt.imshow(np.squeeze(x[random_idx_list[i]]), cmap='gray')
-            plt.title(f"Actual result: {y[random_idx_list[i]]};\nPredicted result: {int(y_pred.round()[random_idx_list[i]])}", fontsize=14, color='black')
+            plt.title(f"Actual result: {y[random_idx_list[i]]};\nPredicted result: {int(y_pred.round()[random_idx_list[i]])}",
+            fontsize=14,
+            color='black'
+            )
     else:
         for i in range(len(mis_class)):
             plt.subplot(1, len(mis_class), i+1)
@@ -465,13 +475,17 @@ def plot_mis_pred(y, y_pred, x):
             plt.yticks([])
             plt.grid(False)
             plt.imshow(np.squeeze(x[random_idx_list[i]]), cmap='gray')
-            plt.title(f"Actual result: {y[random_idx_list[i]]};\nPredicted result: {int(y_pred.round()[random_idx_list[i]])}", fontsize=10, color='black')
-  
-    plt.subplots_adjust(left=0.05,
-                        bottom=0.001, 
-                        right=0.9, 
-                        top=0.4, 
-                        wspace=0.1, 
-                        hspace=0.1)
+            plt.title(f"Actual result: {y[random_idx_list[i]]};\nPredicted result: {int(y_pred.round()[random_idx_list[i]])}",
+            fontsize=10,
+            color='black'
+            )
+
+    plt.subplots_adjust(top=0.92,
+        bottom=0.08,
+        left=0.10,
+        right=0.95,
+        hspace=0.25,
+        wspace=0.35
+    )
     plt.show()
 

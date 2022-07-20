@@ -1,5 +1,6 @@
 """Convolutional neural network model for MCs classification."""
-
+#pylint: disable=W0613
+#pylint: disable=W0611
 import logging
 
 # Layers needed in a CNN
@@ -19,7 +20,6 @@ logger.addHandler(file_handler)
 
 
 def cnn_classifier(shape=(60, 60, 1), verbose=False):
-    # pylint: disable=W0613
     """
     CNN for microcalcification clusters classification.
 
@@ -46,8 +46,8 @@ def cnn_classifier(shape=(60, 60, 1), verbose=False):
      Layer (type)                Output Shape              Param #
     =================================================================
     conv_1 (Conv2D)             (None, 60, 60, 32)        320
-    maxpool_1 (MaxPooling2D)    (None, 30, 30, 32)        0                                                  
-    conv_2 (Conv2D)             (None, 30, 30, 64)        18496                                         
+    maxpool_1 (MaxPooling2D)    (None, 30, 30, 32)        0
+    conv_2 (Conv2D)             (None, 30, 30, 64)        18496
     maxpool_2 (MaxPooling2D)    (None, 15, 15, 64)        0
     dropout_30 (Dropout)        (None, 15, 15, 64)        0
     conv_3 (Conv2D)             (None, 15, 15, 128)       73856
@@ -68,7 +68,12 @@ def cnn_classifier(shape=(60, 60, 1), verbose=False):
     """
 
     model = Sequential()
-    model.add(Conv2D(32, (3, 3), activation='relu', padding='same', name='conv_1', input_shape=shape))
+    model.add(Conv2D(32, (3, 3),
+    activation='relu',
+    padding='same',
+    name='conv_1',
+    input_shape=shape)
+    )
     model.add(MaxPooling2D((2, 2), name='maxpool_1'))
 
     model.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='conv_2'))
@@ -90,8 +95,8 @@ def cnn_classifier(shape=(60, 60, 1), verbose=False):
     model.add(Dense(1, activation='sigmoid', name='output'))
 
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-    
+
     if verbose:
-      model.summary()
-  
+        model.summary()
+
     return model

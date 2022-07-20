@@ -10,23 +10,21 @@
  By stratifying the folds, we can ensure that the class proportions are similar
  between train and test sets, which helps to avoid overfitting."""
 
+# pylint: disable=C0103
+# pylint: disable=R0913
+# pylint: disable=C0412
+# pylint: disable=C0413
+# pylint: disable=R0914
+import itertools
+
 import numpy as np
-from math import *
+#from math import *
 from numpy.random import seed
 import matplotlib.pyplot as plt
 seed(1)
 import tensorflow
 tensorflow.random.set_seed(1)
-from keras.utils.vis_utils import plot_model
-from IPython.display import Image
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
-import itertools
-from sklearn.metrics import roc_auc_score, auc
 from sklearn.metrics import roc_curve
-from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
 # Load model
 from keras.models import load_model
 # Cross validation
@@ -34,7 +32,7 @@ from sklearn.metrics import roc_auc_score, auc
 from sklearn.metrics import roc_curve
 from sklearn.model_selection import StratifiedKFold
 from numpy import interp
-from sklearn.model_selection import KFold
+#from sklearn.model_selection import KFold
 
 
 def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5, epochs=25):
@@ -66,14 +64,14 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5, epochs=25):
     Returns
     -------
     None
-    
+
     """
 
     try:
-      y = y.to_numpy()
-      X = X.to_numpy() 
+        y = y.to_numpy()
+        X = X.to_numpy()
     except AttributeError:
-      pass
+        pass
 
     # Creates per-fold accuracy and loss lists
     train_acc = []
@@ -107,7 +105,7 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5, epochs=25):
                                epochs=epochs,
                                verbose=0
                                )
-    
+
         # Evaluates the efficiency of the model
         scores_train = model.evaluate(X[train], y[train], verbose=0)
         scores_val = model.evaluate(X[val], y[val], verbose=0)
@@ -120,7 +118,7 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5, epochs=25):
         interp_tpr = interp(interp_fpr, fpr, tpr)
         tprs.append(interp_tpr)
 
-        # Compute ROC curve and area under the curve    
+        # Compute ROC curve and area under the curve
         roc_auc = auc(fpr, tpr)
         aucs.append(roc_auc)
         plt.plot(fpr, tpr,
@@ -134,11 +132,11 @@ def plot_cv_roc(X, y, X_test, y_test, model, n_splits=5, epochs=25):
         # Validation
         val_loss.append(scores_val[0])
         val_acc.append(scores_val[1])
-    
+
         # Test
         test_loss.append(scores_test[0])
         test_acc.append(scores_test[1])
-    
+
         i += 1
 
     plt.legend()

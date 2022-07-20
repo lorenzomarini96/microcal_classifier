@@ -1,5 +1,5 @@
 """Data augmentation procedure."""
-
+# pylint: disable=E0401
 import logging
 import os
 
@@ -41,7 +41,7 @@ def convert_to_png(fname, dest_folder):
     --------
     >>> TRAIN_PATH = 'path/to/train/folder/'
     >>> TEST_PATH = 'path/to/train/folder/'
-    >>> for data_path in [TRAIN_PATH, TEST_PATH]: 
+    >>> for data_path in [TRAIN_PATH, TEST_PATH]:
     >>>     for path, folders, fnames in os.walk(data_path):
     >>>         for fname in fnames:
     >>>             abs_path = os.path.join(path, fname)
@@ -49,10 +49,10 @@ def convert_to_png(fname, dest_folder):
     >>>             convert_to_png(abs_path, dest_folder)
 
     """
-    
+
     if not os.path.exists(dest_folder):
         os.makedirs(dest_folder)
-    
+
     dest_fname = os.path.basename(fname).replace('.pgm', '.png')
     dest_fname = os.path.join(dest_folder, dest_fname)
     PIL.Image.open(fname).convert('L').save(dest_fname) # L (8-bit pixels, black and white)
@@ -91,7 +91,7 @@ def data_aug(train_dataset_path, img_width=60, img_height=60, batch_size=32):
                  img_height=IMG_HEIGHT,
                  batch_size=BATCH_SIZE
                  )
- 
+
     """
 
     train_datagen = ImageDataGenerator(
@@ -105,11 +105,11 @@ def data_aug(train_dataset_path, img_width=60, img_height=60, batch_size=32):
         fill_mode='reflect',
         validation_split=0.25
         )
-        
+
     train_gen = train_datagen.flow_from_directory(
         train_dataset_path,
         target_size=(img_width, img_height),
-        color_mode='grayscale', 
+        color_mode='grayscale',
         class_mode='binary',
         subset='training'
         )
@@ -123,12 +123,12 @@ def data_aug(train_dataset_path, img_width=60, img_height=60, batch_size=32):
         subset='validation'
         )
 
-    return train_gen, val_gen 
+    return train_gen, val_gen
 
 
 def single_image_aug(image_path, show=True):
     """
-    Show the effect of the data aumentation procedure --based on ImageDataGenerator-- 
+    Show the effect of the data aumentation procedure --based on ImageDataGenerator--
     showing a given single image.
 
     Parameters
@@ -141,13 +141,13 @@ def single_image_aug(image_path, show=True):
     Returns
     -------
     None
-    
+
     Examples
     --------
-    
+
     >>> IMAGE_PATH = 'path/to/input/image/'
     >>> single_image_aug(image_path, show=True)
-    
+
     """
 
     img = keras.preprocessing.image.load_img(image_path, target_size=(60, 60, 1))
@@ -179,10 +179,10 @@ def single_image_aug(image_path, show=True):
             image_ = batch[0].astype('uint8')
             plt.imshow(image_, cmap='gray')
             plt.subplots_adjust(left=0.05,
-            bottom=0.001, 
-            right=0.9, 
-            top=0.4, 
-            wspace=0.1, 
+            bottom=0.001,
+            right=0.9,
+            top=0.4,
+            wspace=0.1,
             hspace=0.1)
 
         plt.show()

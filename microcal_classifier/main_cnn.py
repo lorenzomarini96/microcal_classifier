@@ -6,7 +6,7 @@ using Convolutional Neural Network (CNN).
 This python script evaluates the performance of the CNN to perform a
 binary classification on a microcalcification image dataset.
 The mammographic images containing either microcalcifications
-or normal tissue. 
+or normal tissue.
 
 The CNN binary classifiers is evaluate by means the following parameters:
 
@@ -111,7 +111,6 @@ if __name__ == '__main__':
     #===========================================
     # STEP 1: Import data set,  data exploration
     #===========================================
-
     #PATH = '/home/lorenzomarini/Desktop/microcal_classifier/dataset/IMAGES/Mammography_micro/'
     PATH = args.datapath
     TRAIN_PATH = os.path.join(PATH, 'Train')
@@ -134,7 +133,7 @@ if __name__ == '__main__':
                                                                perc=PERC,
                                                                verbose=True
                                                                )
-                                                            
+
     #===========================================
     # STEP 2: Build, train and evaluate the CNN
     #===========================================
@@ -144,7 +143,7 @@ if __name__ == '__main__':
     # Training
     EPOCHS = args.epochs
 
-    history = model.fit(x_train, 
+    history = model.fit(x_train,
                     y_train,
                     batch_size=32,
                     validation_data=(x_val, y_val),
@@ -198,7 +197,6 @@ if __name__ == '__main__':
     #============================
     # Data augmentation procedure
     #============================
-    
     if args.augdata:
         for data_path in [TRAIN_PATH, TEST_PATH]:
             for path, folders, fnames in os.walk(data_path):
@@ -251,7 +249,7 @@ if __name__ == '__main__':
         plt.show()
 
         # Evaluate and compare the performances of the two models on test dataset
-        
+
         # 1)
         # Trai set
         model.evaluate(x_train, y_train)
@@ -279,12 +277,12 @@ if __name__ == '__main__':
         # Classification report
         y_test_pred = aug_model.predict(x_test)
         print(classification_report(y_test, y_test_pred.round()))
-    
+
         # Confusion Matrix
         cm = confusion_matrix(y_test, model.predict(x_test).round())
         cm_plot_label =['Normal tissue', 'Micro  cluster']
         plot_confusion_matrix(cm, cm_plot_label, title ='Confusion Matrix')
-        
+
         cm = confusion_matrix(y_test, aug_model.predict(x_test).round())
         cm_plot_label =['Normal tissue', 'Micro  cluster']
         plot_confusion_matrix(cm, cm_plot_label, title ='Confusion Matrix aAug data')
@@ -292,7 +290,7 @@ if __name__ == '__main__':
         # ROC curve
         plot_roc_curve(y_test, model.predict(x_test))
         plot_roc_curve(y_test, aug_model.predict(x_test))
-    
+
     #=============================
     # K-Cross validation procedure
     #=============================
@@ -305,7 +303,4 @@ if __name__ == '__main__':
                     y_test=y_test,
                     model=cnn_classifier(shape=INPUT_SHAPE, verbose=False),
                     n_splits=args.kfolds,
-                    epochs=args.epochs
-        )
-
-    
+                    epochs=args.epochs)
