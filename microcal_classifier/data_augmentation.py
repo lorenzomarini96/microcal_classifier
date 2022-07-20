@@ -74,9 +74,9 @@ def data_aug(train_dataset_path, img_width=60, img_height=60, batch_size=32):
 
     Returns
     -------
-    train_gen : ???
+    train_gen : ImageDataGenerator object
         Generated train data set.
-    val_gen : ???
+    val_gen : ImageDataGenerator object
         Generated validation set.
 
     Examples
@@ -97,19 +97,21 @@ def data_aug(train_dataset_path, img_width=60, img_height=60, batch_size=32):
         rotation_range=40,
         width_shift_range=0.2,
         height_shift_range=0.2,
-        #rescale=1./255,
+        rescale=1./255,
         shear_range=0.2,
         zoom_range=0.2,
         horizontal_flip=True,
         fill_mode='reflect',
-        validation_split=0.3)
+        validation_split=0.25
+        )
         
     train_gen = train_datagen.flow_from_directory(
         train_dataset_path,
         target_size=(img_width, img_height),
         color_mode='grayscale', 
         class_mode='binary',
-        subset='training')
+        subset='training'
+        )
 
     val_gen = train_datagen.flow_from_directory(
         train_dataset_path,
@@ -117,7 +119,8 @@ def data_aug(train_dataset_path, img_width=60, img_height=60, batch_size=32):
         batch_size=batch_size,
         color_mode='grayscale',
         class_mode='binary',
-        subset='validation')
+        subset='validation'
+        )
 
 
 def single_image_aug(image_path, show=True):

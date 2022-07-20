@@ -42,6 +42,7 @@ from cnnhelper import bar_plot, count_labels, plot_random_images, read_imgs, spl
 from cnnhelper import plot_correct_pred, plot_mis_pred, plot_confusion_matrix, plot_roc_curve
 from cnn_model import cnn_classifier
 from cross_validation import plot_cv_roc
+from data_augmentation import convert_to_png, data_aug, single_image_aug
 
 sys.path.insert(0, str(Path(os.getcwd()).parent))
 

@@ -43,40 +43,41 @@ def cnn_classifier(shape=(60, 60, 1), verbose=False):
     >>> model = cnn_classifier(shape=(H_PIXEL_SIZE, V_PIXEL_SIZE, CHANNEL), verbose=True)
     Model: "sequential"
     _________________________________________________________________
-    Layer (type)                Output Shape              Param #
+     Layer (type)                Output Shape              Param #
     =================================================================
     conv_1 (Conv2D)             (None, 60, 60, 32)        320
-    maxpool_1 (MaxPooling2D)    (None, 30, 30, 32)        0
-    conv_2 (Conv2D)             (None, 30, 30, 64)        18496
+    maxpool_1 (MaxPooling2D)    (None, 30, 30, 32)        0                                                  
+    conv_2 (Conv2D)             (None, 30, 30, 64)        18496                                         
     maxpool_2 (MaxPooling2D)    (None, 15, 15, 64)        0
+    dropout_30 (Dropout)        (None, 15, 15, 64)        0
     conv_3 (Conv2D)             (None, 15, 15, 128)       73856
     maxpool_3 (MaxPooling2D)    (None, 7, 7, 128)         0
+    dropout_31 (Dropout)        (None, 7, 7, 128)         0
     conv_4 (Conv2D)             (None, 7, 7, 128)         147584
     maxpool_4 (MaxPooling2D)    (None, 3, 3, 128)         0
-    flatten (Flatten)           (None, 1152)              0
-    dropout (Dropout)           (None, 1152)              0
-    dense_1 (Dense)             (None, 512)               590336
-    dense_2 (Dense)             (None, 128)               65664
+    flatten_10 (Flatten)        (None, 1152)              0
+    dropout_32 (Dropout)        (None, 1152)              0
+    dense_2 (Dense)             (None, 256)               295168
+    dense_3 (Dense)             (None, 128)               32896
     output (Dense)              (None, 1)                 129
     =================================================================
-    Total params: 896,385
-    Trainable params: 896,385
+    Total params: 568,449
+    Trainable params: 568,449
     Non-trainable params: 0
-    _____________________________________________________________
+    _________________________________________________________________
     """
 
     model = Sequential()
-
-    model.add(Input(shape=shape))
-    model.add(Conv2D(32, (3, 3), activation='relu', padding='same', name='conv_1'))
-
+    model.add(Conv2D(32, (3, 3), activation='relu', padding='same', name='conv_1', input_shape=shape))
     model.add(MaxPooling2D((2, 2), name='maxpool_1'))
 
     model.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='conv_2'))
     model.add(MaxPooling2D((2, 2), name='maxpool_2'))
+    model.add(Dropout(0.25))
 
     model.add(Conv2D(128, (3, 3), activation='relu', padding='same', name='conv_3'))
     model.add(MaxPooling2D((2, 2), name='maxpool_3'))
+    model.add(Dropout(0.25))
 
     model.add(Conv2D(128, (3, 3), activation='relu', padding='same', name='conv_4'))
     model.add(MaxPooling2D((2, 2), name='maxpool_4'))
@@ -84,15 +85,13 @@ def cnn_classifier(shape=(60, 60, 1), verbose=False):
     model.add(Flatten())
     model.add(Dropout(0.5))
 
-    model.add(Dense(512, activation='relu', name='dense_1'))
-    model.add(Dense(128, activation='relu', name='dense_2'))
+    model.add(Dense(256, activation='relu', name='dense_2'))
+    model.add(Dense(128, activation='relu', name='dense_3'))
     model.add(Dense(1, activation='sigmoid', name='output'))
 
-    model.compile(loss='binary_crossentropy',
-    optimizer='adam',
-    metrics=['accuracy'])
-
+    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+    
     if verbose:
-        model.summary()
-
+      model.summary()
+  
     return model
