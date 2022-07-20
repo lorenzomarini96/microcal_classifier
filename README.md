@@ -307,8 +307,8 @@ $ python3 main_wavelet_classifier.py -dp /home/lorenzomarini/Desktop/DATASETS_ne
 ## Method 2 (demo)
 - **step 1**) Open the jupyter notebook in the folder *notebook*
 - **step 2**) Download the image data set from [Google Drive](https://drive.google.com/drive/folders/1wqp1YIcqSaoChZd7k7ikwylRFGIarKa6?usp=sharing).
-- **Step 4**) To perform CNN analysis: open the notebook CNN_DEMO.ipynb, follow the step in the notebook and work interactively.
-- **Step 5**) To perfor ML analysis: open the notebook  ML_WAVELET_DEMO.ipynb, follow the step in the notebook and work interactively.`
+- **Step 4**) To perform CNN analysis: open the notebook CNN_demo.ipynb, follow the step in the notebook and work interactively.
+- **Step 5**) To perfor ML analysis: open the notebook  ML_wavelet_demo.ipynb, follow the step in the notebook and work interactively.`
 
 
 ## Unit test
