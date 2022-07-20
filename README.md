@@ -260,17 +260,32 @@ Confusion matrix obtained CNN model (on the left) and with data augmentation (on
 
 ```
 $ main_cnn.py -h 
-usage: main_cnn.py 
+
+usage: main_cnn.py [-h] [-dp] [-de] [-e] [-ad] [-cv] [-k]
+
+CNN classifiers analysis in digital mammography.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -dp , --datapath      path of the data folder.
+  -de , --dataexploration 
+                        Data exploration: data set partition histogram and image visualization.
+  -e , --epochs         Number of epochs for train the CNN.
+  -ad , --augdata       Perform data augmentation procedure.
+  -cv , --crossvalidation 
+                        Perform the cross validation and the plot of ROC curve.
+  -k , --kfolds         Number of folds for the cross validation and the plot of ROC curve.
 
 ```
 
 ```
-$ python3 main_wavelet_classifier.py -dp /home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/  -f db5 -l 4 -k 5 -mlc 'Random Forest' -lt True 
+$ python3 main_cnn.py -dp /home/lorenzomarini/Desktop/microcal_classifier/dataset/IMAGES/Mammography_micro/ -de True -e 25 -ad True -cv True -k 5
 ```
 
 - **Step 5**) To perform ML analysis:
 ```
-$ main_wavelet_classifier.py -h 
+$ main_wavelet_classifier.py -h
+
 usage: main_wavelet_classifier.py [-h] [-dp] [-f] [-l] [-k] [-mlc] [-lt]
 
 ML classifiers analysis in digital mammography.
@@ -289,12 +304,26 @@ optional arguments:
 ```
 $ python3 main_wavelet_classifier.py -dp /home/lorenzomarini/Desktop/DATASETS_new/IMAGES/Mammography_micro/  -f db5 -l 4 -k 5 -mlc 'Random Forest' -lt True 
 ```
+
 ## Method 2 (demo)
 - **step 1**) Open the jupyter notebook in the folder *notebook*
 - **step 2**) Download the image data set from [Google Drive](https://drive.google.com/drive/folders/1wqp1YIcqSaoChZd7k7ikwylRFGIarKa6?usp=sharing).
 - **Step 4**) To perform CNN analysis: open the notebook CNN_DEMO.ipynb, follow the step in the notebook and work interactively.
 - **Step 5**) To perfor ML analysis: open the notebook  ML_WAVELET_DEMO.ipynb, follow the step in the notebook and work interactively.`
 
+
+## Unit test
+
+- Change directory to the test folder, and type:
+
+```
+$ python3 test_microcal.py
+
+----------------------------------------------------------------------
+Ran 5 tests in 12.896s
+
+OK
+```
 
 ## Requirements
 
