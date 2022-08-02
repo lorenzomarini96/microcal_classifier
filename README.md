@@ -4,7 +4,7 @@
 [![Documentation Status](https://readthedocs.org/projects/microcal-classifier/badge/?version=latest)](https://microcal-classifier.readthedocs.io/en/latest/?badge=latest)
 [![GitHub license](https://img.shields.io/github/license/lorenzomarini96/microcal_classifier)](https://github.com/lorenzomarini96/microcal_classifier/blob/main/LICENSE)
 
-Convolutional neural networks for the computing methods for experimental physics and data analysis (CMEPDA) course. This project compare the performance of a convolutional neural networks classification on a microcalcification image dataset, with the performance obtained in an analysis pipeline where the mammographic images containing either microcalcifications or normal tissue are represented in terms of wavelet coefficients.
+Convolutional neural networks for the computing methods for experimental physics and data analysis (CMEPDA) course. This project compares the performance of a convolutional neural networks classification on a microcalcification image dataset, with the performance obtained in an analysis pipeline where the mammographic images containing either microcalcifications or normal tissue are represented in terms of wavelet coefficients.
 
 The repository is structured as follow:
 ```
